@@ -25,21 +25,21 @@ Details
    ![sum1ton o](https://github.com/user-attachments/assets/dd69cb0b-974f-4fb6-9c33-a559b6942f88)
 
 ### Step 4: Inspect the Assembly Code for the Main Function (-O1)
-   : Now open a new terminal and enter the below command. The disassembled assembly code for the main function was inspected to observe how the compiler optimized the program with the `-O1` optimization level.
+   : Opened a new terminal and entered the below command. The disassembled assembly code for the main function was inspected to observe how the compiler optimized the program with the `-O1` optimization level.
    ```
    $ riscv64-unknown-elf-objdump -d sum1ton.o | less
    ```
    ![main](https://github.com/user-attachments/assets/4319d61e-678e-467c-a5ad-de6c4dce23ad)
 
 ### Step 5: Compile the C code using the RISC-V compiler (-Ofast) 
-  : Go back to the old terminal and again compile the code  using the `riscv64-unknown-elf-gcc` compiler with the `-Ofast` optimization level to enable aggressive optimizations for performance.
+  : Gone back to the old terminal and again compiled the code  using the `riscv64-unknown-elf-gcc` compiler with the `-Ofast` optimization level to enable aggressive optimizations for performance.
   ```
   $ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton.o sum1ton.c
   ```
   ![ofast](https://github.com/user-attachments/assets/4c9d90d4-0593-4c65-8364-8fc473597969)
 
 ### Step 6: Inspect the Assembly Code for the Main Function (-Ofast)
-  : Now again go to the the new terminal and enter the below command.The disassembled assembly code for the main function was inspected again to analyze the effects of the `-Ofast` optimization level and compare it with `-O1`.
+  : Again gone to the the new terminal and entered the below command.The disassembled assembly code for the main function was inspected again to analyze the effects of the `-Ofast` optimization level.
   ```
   $ riscv64-unknown-elf-objdump -d sum1ton.o | less
   ```
