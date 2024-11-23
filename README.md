@@ -10,6 +10,9 @@ Details
 
 ### Step 2: Compile the C code using GCC compiler
   : The code was compiled using GCC Compiler and the output was printed on the terminal. 
+  ```
+  $ gcc sum1ton.c
+  ```
     ![c_output](https://github.com/user-attachments/assets/2b123eda-2d8c-4f79-8a75-c8b95762c5ca)
 
 ### Step 3: Compile the C code using the RISC-V compiler (-O1) 
