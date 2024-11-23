@@ -18,12 +18,15 @@ Details
 
 ### Step 4: Inspect the Assembly Code for the Main Function (-O1)
    : The disassembled assembly code for the main function was inspected to observe how the compiler optimized the program with the -O1 optimization level.
+   
     ![main](https://github.com/user-attachments/assets/38d970be-83c2-4a9f-aece-b725d3d2a1a6)
 
 ### Step 5: Compile the C code using the RISC-V compiler (-Ofast) 
   : The program was recompiled using the riscv64-unknown-elf-gcc compiler with the -Ofast optimization level to enable aggressive optimizations for performance.
+  
     ![ofast](https://github.com/user-attachments/assets/b307e0dd-0ae6-42c6-b7f3-ac10915f220e)
 
 ### Step 6: Inspect the Assembly Code for the Main Function (-Ofast)
   : The disassembled assembly code for the main function was inspected again to analyze the effects of the -Ofast optimization level and compare it with -O1.
+  
     ![main2](https://github.com/user-attachments/assets/f45076b8-5f5b-4138-9b83-b111a956cc83)
