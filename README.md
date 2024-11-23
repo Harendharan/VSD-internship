@@ -5,7 +5,7 @@ Details
 ## Task 1: 
 ---
 ### Step 1: Create the Program file 
-  : Created a file named `sum1ton.c` in the home folder, typed a C code to compute the sum of numbers from 1 to n using a text editor, and saved it.
+Created a file named `sum1ton.c` in the home folder, typed a C code to compute the sum of numbers from 1 to n using a text editor, and saved it.
     ![c_code](https://github.com/user-attachments/assets/bfd3de06-efef-4f54-ac66-f96ebd0ed2ba)
 
 ### Step 2: Compile the C code using GCC compiler
