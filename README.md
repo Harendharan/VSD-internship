@@ -9,7 +9,7 @@ Details
     ![c_code](https://github.com/user-attachments/assets/bfd3de06-efef-4f54-ac66-f96ebd0ed2ba)
 
 ### Step 2: Compilation of the c code
-  : The code was compiled using GCC () Compiler and the output is printed on the terminal. 
+  : The code was compiled using GCC Compiler and the output is printed on the terminal. 
     ![c_output](https://github.com/user-attachments/assets/2b123eda-2d8c-4f79-8a75-c8b95762c5ca)
 
 
