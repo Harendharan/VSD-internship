@@ -45,4 +45,170 @@ Again gone to the the new terminal and entered the below command.The disassemble
   ```
   ![main2](https://github.com/user-attachments/assets/5d08ed72-ee14-458f-8a51-3c0a881a4369)
 
+---
+  ## Task 2
+
+### Branch Prediction Using a Neural Network
+
+#### Introduction
+
+Branch prediction is a critical component of modern CPUs to improve instruction pipeline efficiency. By predicting the outcome of a branch instruction (taken or not taken), processors can minimize delays. This project demonstrates a neural network-based approach for branch prediction, where a simple feedforward neural network is trained to predict branch behavior based on historical patterns.
+
+---
+
+#### Project Details
+
+- **Neural Network Architecture**: 
+  - Input layer: 5 neurons (representing 5 historical branch outcomes).
+  - Hidden layer: 3 neurons (with activation function).
+  - Output layer: 1 neuron (producing a value between 0 and 1).
+  
+- **Objective**: Predict whether a branch will be taken (output near 1) or not taken (output near 0).
+
+---
+
+#### Implementation
+
+Below is the complete implementation of the neural network-based branch predictor in C:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+#define INPUT_SIZE 5
+#define HIDDEN_SIZE 3
+#define OUTPUT_SIZE 1
+#define EPOCHS 10000
+#define LEARNING_RATE 0.1
+
+// Activation function (Sigmoid)
+double sigmoid(double x) {
+    return 1.0 / (1.0 + exp(-x));
+}
+
+// Derivative of Sigmoid
+double sigmoid_derivative(double x) {
+    return x * (1.0 - x);
+}
+
+// Initialize weights and biases randomly
+void initialize(double weights_in[HIDDEN_SIZE][INPUT_SIZE], double weights_out[OUTPUT_SIZE][HIDDEN_SIZE], 
+                double bias_hidden[HIDDEN_SIZE], double bias_output[OUTPUT_SIZE]) {
+    for (int i = 0; i < HIDDEN_SIZE; i++) {
+        for (int j = 0; j < INPUT_SIZE; j++) {
+            weights_in[i][j] = (double)rand() / RAND_MAX;
+        }
+        bias_hidden[i] = (double)rand() / RAND_MAX;
+    }
+
+    for (int i = 0; i < OUTPUT_SIZE; i++) {
+        for (int j = 0; j < HIDDEN_SIZE; j++) {
+            weights_out[i][j] = (double)rand() / RAND_MAX;
+        }
+        bias_output[i] = (double)rand() / RAND_MAX;
+    }
+}
+
+// Forward pass
+void forward(double input[INPUT_SIZE], double weights_in[HIDDEN_SIZE][INPUT_SIZE], double bias_hidden[HIDDEN_SIZE],
+             double hidden[HIDDEN_SIZE], double weights_out[OUTPUT_SIZE][HIDDEN_SIZE], 
+             double bias_output[OUTPUT_SIZE], double output[OUTPUT_SIZE]) {
+    // Hidden layer computation
+    for (int i = 0; i < HIDDEN_SIZE; i++) {
+        hidden[i] = bias_hidden[i];
+        for (int j = 0; j < INPUT_SIZE; j++) {
+            hidden[i] += input[j] * weights_in[i][j];
+        }
+        hidden[i] = sigmoid(hidden[i]);
+    }
+
+    // Output layer computation
+    for (int i = 0; i < OUTPUT_SIZE; i++) {
+        output[i] = bias_output[i];
+        for (int j = 0; j < HIDDEN_SIZE; j++) {
+            output[i] += hidden[j] * weights_out[i][j];
+        }
+        output[i] = sigmoid(output[i]);
+    }
+}
+
+// Backward pass (Training)
+void backward(double input[INPUT_SIZE], double weights_in[HIDDEN_SIZE][INPUT_SIZE], double bias_hidden[HIDDEN_SIZE],
+              double hidden[HIDDEN_SIZE], double weights_out[OUTPUT_SIZE][HIDDEN_SIZE], double bias_output[OUTPUT_SIZE], 
+              double output[OUTPUT_SIZE], double target[OUTPUT_SIZE]) {
+    double output_error[OUTPUT_SIZE], hidden_error[HIDDEN_SIZE];
+
+    // Calculate output error
+    for (int i = 0; i < OUTPUT_SIZE; i++) {
+        output_error[i] = (target[i] - output[i]) * sigmoid_derivative(output[i]);
+    }
+
+    // Calculate hidden layer error
+    for (int i = 0; i < HIDDEN_SIZE; i++) {
+        hidden_error[i] = 0.0;
+        for (int j = 0; j < OUTPUT_SIZE; j++) {
+            hidden_error[i] += output_error[j] * weights_out[j][i];
+        }
+        hidden_error[i] *= sigmoid_derivative(hidden[i]);
+    }
+
+    // Update weights and biases (Output layer)
+    for (int i = 0; i < OUTPUT_SIZE; i++) {
+        for (int j = 0; j < HIDDEN_SIZE; j++) {
+            weights_out[i][j] += LEARNING_RATE * output_error[i] * hidden[j];
+        }
+        bias_output[i] += LEARNING_RATE * output_error[i];
+    }
+
+    // Update weights and biases (Input to Hidden layer)
+    for (int i = 0; i < HIDDEN_SIZE; i++) {
+        for (int j = 0; j < INPUT_SIZE; j++) {
+            weights_in[i][j] += LEARNING_RATE * hidden_error[i] * input[j];
+        }
+        bias_hidden[i] += LEARNING_RATE * hidden_error[i];
+    }
+}
+
+// Main function
+int main() {
+    // Define network parameters
+    double weights_in[HIDDEN_SIZE][INPUT_SIZE], weights_out[OUTPUT_SIZE][HIDDEN_SIZE];
+    double bias_hidden[HIDDEN_SIZE], bias_output[OUTPUT_SIZE];
+    double hidden[HIDDEN_SIZE], output[OUTPUT_SIZE];
+
+    // Initialize network
+    initialize(weights_in, weights_out, bias_hidden, bias_output);
+
+    // Define training data
+    double inputs[4][INPUT_SIZE] = {
+        {1, 0, 1, 1, 0},  // Example historical branch patterns
+        {0, 1, 1, 0, 1},
+        {1, 1, 0, 1, 0},
+        {0, 0, 0, 1, 1}
+    };
+    double targets[4][OUTPUT_SIZE] = {
+        {1},  // Branch taken
+        {0},  // Branch not taken
+        {1},  // Branch taken
+        {0}   // Branch not taken
+    };
+
+    // Train the network
+    for (int epoch = 0; epoch < EPOCHS; epoch++) {
+        for (int i = 0; i < 4; i++) {
+            forward(inputs[i], weights_in, bias_hidden, hidden, weights_out, bias_output, output);
+            backward(inputs[i], weights_in, bias_hidden, hidden, weights_out, bias_output, output, targets[i]);
+        }
+    }
+
+    // Test the network
+    double test_input[INPUT_SIZE] = {0, 1, 0, 1, 1};
+    forward(test_input, weights_in, bias_hidden, hidden, weights_out, bias_output, output);
+    printf("Prediction for input {0, 1, 0, 1, 1}: %.2f\n", output[0]);
+
+    return 0;
+}
+
+
   
