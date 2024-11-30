@@ -87,7 +87,6 @@ Below is the implementation of the neural network-based branch predictor in C:
 ```c
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 #define INPUT_SIZE 5
 #define HIDDEN_SIZE 3
@@ -95,9 +94,20 @@ Below is the implementation of the neural network-based branch predictor in C:
 #define EPOCHS 10000
 #define LEARNING_RATE 0.1
 
+// Custom approximation of the exponential function
+double custom_exp(double x) {
+    double result = 1.0;
+    double term = 1.0;
+    for (int i = 1; i < 20; i++) {  // Use 20 terms for better approximation
+        term *= x / i;
+        result += term;
+    }
+    return result;
+}
+
 // Activation function (Sigmoid)
 double sigmoid(double x) {
-    return 1.0 / (1.0 + exp(-x));
+    return 1.0 / (1.0 + custom_exp(-x));
 }
 
 // Derivative of Sigmoid
@@ -217,8 +227,11 @@ int main() {
 
     // Test the network
     double test_input[INPUT_SIZE] = {0, 1, 0, 1, 1};
+    //double test_input[INPUT_SIZE] ={1, 0, 1, 1, 0};
     forward(test_input, weights_in, bias_hidden, hidden, weights_out, bias_output, output);
     printf("Prediction for input {0, 1, 0, 1, 1}: %.2f\n", output[0]);
+    //printf("Prediction for input {1, 0, 1, 1, 0}: %.2f\n", output[0]);
+    printf("%s\n", output[0] >= 0.5 ? "Branch Taken" : "Branch Not Taken");
 
     return 0;
 }
@@ -231,7 +244,7 @@ int main() {
   $ gcc bpnn.c
   $ ./a.out
   ```
-![task2pic1](https://github.com/user-attachments/assets/445d51ea-e331-4a3b-bb1e-8b170043e1f0)
+![task1pic1](https://github.com/user-attachments/assets/e29b6be4-fcc6-43b6-873a-242241e0b11a)
 
 ---
 
