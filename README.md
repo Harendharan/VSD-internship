@@ -46,13 +46,26 @@ Again gone to the the new terminal and entered the below command.The disassemble
   ![main2](https://github.com/user-attachments/assets/5d08ed72-ee14-458f-8a51-3c0a881a4369)
 
 ---
-  ## Task 2
+## Task 2
 
 ### Branch Prediction Using a Neural Network
 
 #### Introduction
 
 Branch prediction is a critical component of modern CPUs to improve instruction pipeline efficiency. By predicting the outcome of a branch instruction (taken or not taken), processors can minimize delays. This project demonstrates a neural network-based approach for branch prediction, where a simple feedforward neural network is trained to predict branch behavior based on historical patterns.
+
+---
+
+#### Data Set
+
+The table below represents the training data used for the neural network. Each row corresponds to a historical branch pattern (input) and the associated branch outcome (target).
+
+| **Input (Branch History)** | **Target (Branch Outcome)** |
+|-----------------------------|-----------------------------|
+| `{1, 0, 1, 1, 0}`           | `1` (Taken)                |
+| `{0, 1, 1, 0, 1}`           | `0` (Not Taken)            |
+| `{1, 1, 0, 1, 0}`           | `1` (Taken)                |
+| `{0, 0, 0, 1, 1}`           | `0` (Not Taken)            |
 
 ---
 
