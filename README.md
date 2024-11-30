@@ -80,7 +80,7 @@ The table below represents the training data used for the neural network. Each r
 
 ---
 
-#### Implementation
+#### implementation
 
 Below is the implementation of the neural network-based branch predictor in C:
 
@@ -222,25 +222,86 @@ int main() {
 
     return 0;
 }
+```
 
+---
 
-#### Compile the C code using GCC compiler
-![task2pic1](https://github.com/user-attachments/assets/1f26f056-573d-4877-a119-471febcb0ef4)
+####  Compile the C code using GCC compiler
+  ```
+  $ gcc bpnn.c
+  $ ./a.out
+  ```
+![task2pic1](https://github.com/user-attachments/assets/445d51ea-e331-4a3b-bb1e-8b170043e1f0)
 
-#### Compile the C code using the RISC-V compiler (-O1)
-![task2pic2](https://github.com/user-attachments/assets/b8e4daab-69de-487c-8b65-913ae3ffc714)
- 
-#### Inspect the Assembly Code for the Main Function (-O1)
-![task2pic3](https://github.com/user-attachments/assets/cebb4cb4-3df2-4a18-a0ae-8205af3e54e7)
+---
 
-#### Compile the C code using the RISC-V compiler (-Ofast) 
-![task2pic4](https://github.com/user-attachments/assets/c109c6a8-090e-496d-addc-a9e07c576782)
+---
 
-#### Inspect the Assembly Code for the Main Function (-Ofast)
-![task2pic5](https://github.com/user-attachments/assets/29c28935-0609-4f03-90e6-3bd93caf45e5)
+####  Compile the C code using the RISC-V compiler ( -O1)
+  ```
+  $ riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o bpnn.o bpnn.c
+  $ ls -ltr bpnn.o
+  ```
+![task2pic2](https://github.com/user-attachments/assets/dd4e62ac-7fee-4034-aeb3-0a3d69c166f9)
 
-#### Inspect the Assembly Code for the Main Function (-Ofast)
-![task2pic6](https://github.com/user-attachments/assets/21c1d3ff-504c-45c6-9073-8e6f27330cbf)
+---
 
+---
 
-  
+####  Inspect the Assembly Code for the Main Function (-O1)
+   ```
+   $ riscv64-unknown-elf-objdump -d bpnn.o | less
+   ```
+![task2pic3](https://github.com/user-attachments/assets/3b9cdfc3-c2bb-4891-9cd7-66ae7b0a06c2)
+
+---
+
+---
+
+####  Compile the C code using the RISC-V compiler (-Ofast) 
+  ```
+  $ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o bpnn.o bpnn.c
+  ```
+![task2pic4](https://github.com/user-attachments/assets/44512c5a-b8b8-4c19-8bf3-d862352252be)
+
+---
+
+---
+
+####  Inspect the Assembly Code for the Main Function (-Ofast)
+  ```
+  $ riscv64-unknown-elf-objdump -d bpnn.o | less
+  ```
+![task2pic5](https://github.com/user-attachments/assets/fc8e6b90-40fe-4d98-bd46-318af0838088)
+
+---
+
+---
+
+####  Observe the ouput given by RISC V Compiler
+  ```
+  $ spike pk bpnn.o
+  ```
+![task2pic6](https://github.com/user-attachments/assets/a3fdb3ac-4f99-4270-b537-e142749afac6)
+
+---
+
+---
+
+####  Inspect the Stack pointerin the  Assembly Code of the Main Function (-Ofast)
+  ```
+  $ riscv64-unknown-elf-objdump -d bpnn.o | less
+  ```
+![task2pic7](https://github.com/user-attachments/assets/9d91196d-f9fa-4fbb-bb1f-9347ad47a02e)
+
+---
+
+---
+
+####  Debug the C code compiled by RISC V Compiler using spike command by inspecting the stack pointer
+  ```
+  $ spike -d pk bpnn.o
+  ```
+![task2pic8](https://github.com/user-attachments/assets/20470995-d3b2-415b-88a7-8e810bb4af90)
+
+---
