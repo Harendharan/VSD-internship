@@ -223,14 +223,13 @@ int main() {
     return 0;
 }
 
----
 
 #### Compile the C code using GCC compiler
 ![task2pic1](https://github.com/user-attachments/assets/1f26f056-573d-4877-a119-471febcb0ef4)
- ![c_code](https://github.com/user-attachments/assets/bfd3de06-efef-4f54-ac66-f96ebd0ed2ba)
+
 #### Compile the C code using the RISC-V compiler (-O1)
 ![task2pic2](https://github.com/user-attachments/assets/b8e4daab-69de-487c-8b65-913ae3ffc714)
- ![c_code](https://github.com/user-attachments/assets/bfd3de06-efef-4f54-ac66-f96ebd0ed2ba)
+ 
 #### Inspect the Assembly Code for the Main Function (-O1)
 ![task2pic3](https://github.com/user-attachments/assets/cebb4cb4-3df2-4a18-a0ae-8205af3e54e7)
 
