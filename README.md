@@ -225,7 +225,7 @@ int main() {
 
 ---
 #### Compile the C code using GCC compiler
-![task2pic1](https://github.com/user-attachments/assets/9053d62c-c164-445b-af7e-43c8e198a5f2)
+![task2pic1](https://github.com/user-attachments/assets/1f26f056-573d-4877-a119-471febcb0ef4)
 
 #### Compile the C code using the RISC-V compiler (-O1)
 ![task2pic2](https://github.com/user-attachments/assets/b8e4daab-69de-487c-8b65-913ae3ffc714)
