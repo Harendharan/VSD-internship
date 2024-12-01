@@ -231,8 +231,9 @@ int main() {
     forward(test_input, weights_in, bias_hidden, hidden, weights_out, bias_output, output);
     printf("Prediction for input {0, 1, 0, 1, 1}: %.2f\n", output[0]);
     //printf("Prediction for input {1, 0, 1, 1, 0}: %.2f\n", output[0]);
+    //printf("Prediction for input : %.2f\n", output[0]);
     printf("%s\n", output[0] >= 0.5 ? "Branch Taken" : "Branch Not Taken");
-
+    
     return 0;
 }
 ```
