@@ -331,7 +331,9 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 | **Bit**  | 31-25      | 24-20     | 19-15     | 14-12     | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|-----------|-----------|-----------|
 | **Field**| funct7     | rs2       | rs1       | funct3    | rd        | opcode    |
-| **Description** | Function code (extended operation) | Source Register 2  | Source Register 1  | Function code (defines operation) | Destination Register  | Operation code (7 bits) |
+| **Description** | Function code (extended operation) | Source Register 2  | Source Register 1  | Function code (defines operation) | Destination Register  | Operation code  |
+
+![WhatsApp Image 2024-12-06 at 16 52 58_88180d42](https://github.com/user-attachments/assets/62d18328-66d8-461d-91f5-af4d9991ec49)
 
 ---
 
@@ -339,15 +341,10 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 
 | **Bit**  | 31-20      | 19-15     | 14-12     | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|-----------|-----------|
-| **Field**| imm        | rs1       | funct3    | rd        | opcode    |
-| **Description** | Immediate value (12 bits) | Source Register 1 (5 bits) | Function code (3 bits) | Destination Register (5 bits) | Operation code (7 bits) |
+| **Field**| imm[11:0]        | rs1       | funct3    | rd        | opcode    |
+| **Description** | Immediate bits | Source Register 1 | Function code (defines operation) | Destination Register | Operation code |
 
-#### Example for I-Type (ADDI):
-
-| **Bit**  | 31-20    | 19-15    | 14-12    | 11-7     | 6-0      |
-|----------|----------|----------|----------|----------|----------|
-| **Value**| 000000000000 | 00000    | 000      | 00000    | 0010011 |
-| **Operation** | ADDI     |          | funct3    | rd (destination) | opcode (ADDI)  |
+![WhatsApp Image 2024-12-06 at 16 57 30_40e1abd6](https://github.com/user-attachments/assets/3e567cf2-00eb-4711-b30e-c760c5402fc4)
 
 ---
 
@@ -356,30 +353,21 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 | **Bit**  | 31-25      | 24-20     | 19-15     | 14-12     | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|-----------|-----------|-----------|
 | **Field**| imm[11:5]  | rs2       | rs1       | funct3    | imm[4:0]  | opcode    |
-| **Description** | Immediate bits [11:5] (7 bits) | Source Register 2 (5 bits) | Source Register 1 (5 bits) | Function code (3 bits) | Immediate bits [4:0] (5 bits) | Operation code (7 bits) |
+| **Description** | Immediate bits  | Source Register 2 | Source Register 1 | Function code (defines operation) | Immediate bits  | Operation code |
 
-#### Example for S-Type (SB):
-
-| **Bit**  | 31-25    | 24-20    | 19-15    | 14-12    | 11-7     | 6-0      |
-|----------|----------|----------|----------|----------|----------|----------|
-| **Value**| 0000000  | 00000    | 00000    | 000      | 00000    | 0100011 |
-| **Operation** | SB (Store Byte) |          | funct3    | opcode (SB)  |
+![WhatsApp Image 2024-12-06 at 17 45 13_a0fbc9ab](https://github.com/user-attachments/assets/c330e2d7-7bb2-4de2-adf2-5df40744aa8a)
 
 ---
 
 ## B-Type Instruction Format
 
-| **Bit**  | 31-25      | 24-20     | 19-15     | 14-12     | 11-8      | 7-1       | 0       |
-|----------|------------|-----------|-----------|-----------|-----------|-----------|---------|
-| **Field**| imm[12]    | rs2       | rs1       | funct3    | imm[10:5] | imm[4:1]  | imm[11] |
-| **Description** | Immediate bit [12] (1 bit) | Source Register 2 (5 bits) | Source Register 1 (5 bits) | Function code (3 bits) | Immediate bits [10:5] (6 bits) | Immediate bits [4:1] (4 bits) | Immediate bit [11] (1 bit) |
+| **Bit**  |    31     | 30-25     | 24-20     | 19-15     | 14-12      | 11-8       |    7     | 6-0       |
+|----------|------------|-----------|-----------|-----------|-----------|-----------|---------|---------|
+| **Field**| imm[12]    | imm[10:5]       | rs2       | rs1    | funct3 | imm[4:1]  | imm[11] | opcode |
+| **Description** | Immediate bit | Immediate bits |  Source Register 2 | Source Register 2 | Source Register 1 | Function code (defines operation) | Immediate bits | Immediate bit | Operation code |
 
-#### Example for B-Type (BEQ):
+![WhatsApp Image 2024-12-06 at 17 07 25_e8674253](https://github.com/user-attachments/assets/4c8c579e-7866-460b-bf88-f5c4b0ed3e33)
 
-| **Bit**  | 31-25    | 24-20    | 19-15    | 14-12    | 11-8     | 7-1      | 0       |
-|----------|----------|----------|----------|----------|----------|----------|---------|
-| **Value**| 0000000  | 00000    | 00000    | 000      | 000000   | 0001     | 0       |
-| **Operation** | BEQ (Branch if Equal) |          | funct3    | opcode (BEQ)  |
 
 ---
 
@@ -387,15 +375,10 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 
 | **Bit**  | 31-12      | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|
-| **Field**| imm        | rd        | opcode    |
-| **Description** | Immediate value (20 bits) | Destination Register (5 bits) | Operation code (7 bits) |
+| **Field**| imm[31-12]      | rd        | opcode    |
+| **Description** | Immediate bits | Destination Register | Operation code |
 
-#### Example for U-Type (LUI):
-
-| **Bit**  | 31-12    | 11-7     | 6-0      |
-|----------|----------|----------|----------|
-| **Value**| 000000000000 | 00000    | 0110111 |
-| **Operation** | LUI      |          | opcode (LUI)  |
+![WhatsApp Image 2024-12-06 at 17 54 28_8d65a2a1](https://github.com/user-attachments/assets/27904b7f-6048-4e82-855d-d7ed5ec24260)
 
 ---
 
@@ -403,30 +386,13 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 
 | **Bit**  | 31-12      | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|
-| **Field**| imm        | rd        | opcode    |
-| **Description** | Immediate value (20 bits) | Destination Register (5 bits) | Operation code (7 bits) |
+| **Field**| {imm[20],imm[10:1],imm[11],imm[19:12]}       | rd        | opcode    |
+| **Description** | Immediate bits  | Destination Register | Operation code |
 
-#### Example for J-Type (JAL):
-
-| **Bit**  | 31-12    | 11-7     | 6-0      |
-|----------|----------|----------|----------|
-| **Value**| 000000000000 | 00000    | 1101111 |
-| **Operation** | JAL (Jump and Link) |          | opcode (JAL)  |
+![WhatsApp Image 2024-12-06 at 17 54 28_19a3ba51](https://github.com/user-attachments/assets/7a90011d-b24e-452c-9063-2a1d51181c5d)
 
 ---
 
-## Summary of Instruction Formats:
-
-| **Instruction Type** | **Bit Position (31-0)**       | **Example**              |
-|----------------------|-------------------------------|--------------------------|
-| **R-Type**           | funct7 | rs2 | rs1 | funct3 | rd | opcode | | `ADD`, `SUB`           |
-| **I-Type**           | imm | rs1 | funct3 | rd | opcode | | `ADDI`, `XORI`         |
-| **S-Type**           | imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode | | `SB`, `SH`, `SW`       |
-| **B-Type**           | imm[12] | rs2 | rs1 | funct3 | imm[10:5] | imm[4:1] | imm[11] | | `BEQ`, `BNE`, `BLT`    |
-| **U-Type**           | imm | rd | opcode | | `LUI`, `AUIPC`         |
-| **J-Type**           | imm | rd | opcode | | `JAL`                  |
-
----
 
 ## Encoding Branch Prediction Using a Neural Network Application Instructions
 
