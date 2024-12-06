@@ -320,6 +320,8 @@ The RV32I instruction set architecture (ISA) in RISC-V is made up of several typ
 - **U-Type Instructions**
 - **J-Type Instructions**
 
+![WhatsApp Image 2024-12-06 at 15 45 43_7140aa82](https://github.com/user-attachments/assets/02cee157-e459-47ee-a6b9-d199ba388c78)
+
 ---
 
 ## R-Type Instruction Format
@@ -327,14 +329,7 @@ The RV32I instruction set architecture (ISA) in RISC-V is made up of several typ
 | **Bit**  | 31-25      | 24-20     | 19-15     | 14-12     | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|-----------|-----------|-----------|
 | **Field**| funct7     | rs2       | rs1       | funct3    | rd        | opcode    |
-| **Description** | Function code (7 bits) | Source Register 2 (5 bits) | Source Register 1 (5 bits) | Function code (3 bits) | Destination Register (5 bits) | Operation code (7 bits) |
-
-#### Example for R-Type (ADD):
-
-| **Bit**  | 31-25    | 24-20    | 19-15    | 14-12    | 11-7     | 6-0      |
-|----------|----------|----------|----------|----------|----------|----------|
-| **Value**| 0000000  | 00000    | 00000    | 000      | 00000    | 0110011 |
-| **Operation** | ADD      |          |          | funct3    | rd (destination) | opcode (ADD)  |
+| **Description** | Function code (extended operation) | Source Register 2  | Source Register 1  | Function code (defines operation) | Destination Register  | Operation code (7 bits) |
 
 ---
 
