@@ -396,149 +396,484 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 
 ## Encoding Branch Prediction Using a Neural Network Application Instructions
 
-### 1. **ADDI sp, sp, -496**
+### **1. addi sp, sp, -496**
 
-For the instruction `addi sp, sp, -496` (sign-extended to 12 bits: `111111111000`):
+For the instruction `addi sp, sp, -496`:
 
 | **Bit**       | **31-20**       | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|
+| **Field**     | imm[11:0]       | rs1 (sp)  | funct3    | rd (sp)   | opcode    |
 | **Value**     | 111111111000    | 00010     | 000       | 00010     | 0010011   |
-| **Operation** | imm[31:20]      | rs1 (sp)  | funct3    | rd (sp)   | opcode (ADDI) |
 
-**32-bit Representation:** 111111111000 00010 000 00010 0010011
+#### **Explanation of Fields:**
+- **imm[11:0]**: `-496` is represented as `111111111000` (12-bit sign-extended immediate).  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `000` indicates an `addi` operation.  
+- **rd**: `sp` is register `x2`, encoded as `00010`.  
+- **opcode**: `0010011` is the opcode for immediate arithmetic instructions.
+
+#### **32-bit Representation:**
+`111111111000 00010 000 00010 0010011`  
+**Hexadecimal Representation:** `0xFFF10213`
 
 ---
 
-### 2. **SD ra, 488(sp)**
+### **2. sd ra, 488(sp)**
 
 For the instruction `sd ra, 488(sp)`:
 
 | **Bit**       | **31-25**       | **24-20** | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|-----------|
-| **Value**     | 0000001         | 00000     | 00000     | 000       | 00010     | 0110011   |
-| **Operation** | imm[31:25]      | rs1 (sp)  | rs2 (ra)  | funct3    | rd (ra)   | opcode (SD) |
+| **Field**     | imm[11:5]       | rs2 (ra)  | rs1 (sp)  | funct3    | imm[4:0]  | opcode    |
+| **Value**     | 0111100         | 00001     | 00010     | 011       | 01000     | 0100011   |
 
-**32-bit Representation:** 0000001 00000 00000 000 00010 0110011
+#### **Explanation of Fields:**
+- **imm[11:5]**: Upper 7 bits of `488` (`1111000` in binary), encoded as `0111100`.  
+- **rs2**: `ra` is register `x1`, encoded as `00001`.  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `011` indicates a `sd` operation.  
+- **imm[4:0]**: Lower 5 bits of `488` (`1111000` in binary), encoded as `01000`.  
+- **opcode**: `0100011` is the opcode for store instructions.
+
+#### **32-bit Representation:**
+`0111100 00001 00010 011 01000 0100011`  
+**Hexadecimal Representation:** `0x3E825023`
 
 ---
 
-### 3. **SD s0, 480(sp)**
+### **3. sd s0, 480(sp)**
 
 For the instruction `sd s0, 480(sp)`:
 
 | **Bit**       | **31-25**       | **24-20** | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|-----------|
-| **Value**     | 0000001         | 00000     | 10000     | 000       | 00100     | 0110011   |
-| **Operation** | imm[31:25]      | rs1 (sp)  | rs2 (s0)  | funct3    | rd (s0)   | opcode (SD) |
+| **Field**     | imm[11:5]       | rs2 (s0)  | rs1 (sp)  | funct3    | imm[4:0]  | opcode    |
+| **Value**     | 0111000         | 00000     | 00010     | 011       | 00000     | 0100011   |
 
-**32-bit Representation:** 0000001 00000 10000 000 00100 0110011
+#### **Explanation of Fields:**
+- **imm[11:5]**: Upper 7 bits of `480` (`1111000` in binary), encoded as `0111000`.  
+- **rs2**: `s0` is register `x8`, encoded as `01000`.  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `011` indicates a `sd` operation.  
+- **imm[4:0]**: Lower 5 bits of `480` (`1110000` in binary), encoded as `00000`.  
+- **opcode**: `0100011` is the opcode for store instructions.
+
+#### **32-bit Representation:**
+`0111000 01000 00010 011 00000 0100011`  
+**Hexadecimal Representation:** `0x3A802023`
 
 ---
 
-### 4. **SD s1, 472(sp)**
+### **4. sd s1, 472(sp)**
 
 For the instruction `sd s1, 472(sp)`:
 
 | **Bit**       | **31-25**       | **24-20** | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|-----------|
-| **Value**     | 0000001         | 00000     | 10001     | 000       | 00101     | 0110011   |
-| **Operation** | imm[31:25]      | rs1 (sp)  | rs2 (s1)  | funct3    | rd (s1)   | opcode (SD) |
+| **Field**     | imm[11:5]       | rs2 (s1)  | rs1 (sp)  | funct3    | imm[4:0]  | opcode    |
+| **Value**     | 0111000         | 00001     | 00010     | 011       | 00000     | 0100011   |
 
-**32-bit Representation:** 0000001 00000 10001 000 00101 0110011
+#### **Explanation of Fields:**
+- **imm[11:5]**: Upper 7 bits of `472` (`1110100` in binary), encoded as `0111000`.  
+- **rs2**: `s1` is register `x9`, encoded as `01001`.  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `011` indicates a `sd` operation.  
+- **imm[4:0]**: Lower 5 bits of `472` (`1110000` in binary), encoded as `00000`.  
+- **opcode**: `0100011` is the opcode for store instructions.
+
+#### **32-bit Representation:**
+`0111000 01001 00010 011 00000 0100011`  
+**Hexadecimal Representation:** `0x3A902023`
 
 ---
 
-### 5. **SD s2, 464(sp)**
+### **5. sd s2, 464(sp)**
 
 For the instruction `sd s2, 464(sp)`:
 
 | **Bit**       | **31-25**       | **24-20** | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|-----------|
-| **Value**     | 0000001         | 00000     | 10010     | 000       | 00110     | 0110011   |
-| **Operation** | imm[31:25]      | rs1 (sp)  | rs2 (s2)  | funct3    | rd (s2)   | opcode (SD) |
+| **Field**     | imm[11:5]       | rs2 (s2)  | rs1 (sp)  | funct3    | imm[4:0]  | opcode    |
+| **Value**     | 0111000         | 00010     | 00010     | 011       | 00000     | 0100011   |
 
-**32-bit Representation:** 0000001 00000 10010 000 00110 0110011
+#### **Explanation of Fields:**
+- **imm[11:5]**: Upper 7 bits of `464` (`1110100` in binary), encoded as `0111000`.  
+- **rs2**: `s2` is register `x18`, encoded as `10010`.  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `011` indicates a `sd` operation.  
+- **imm[4:0]**: Lower 5 bits of `464` (`1110000` in binary), encoded as `00000`.  
+- **opcode**: `0100011` is the opcode for store instructions.
+
+#### **32-bit Representation:**
+`0111000 10010 00010 011 00000 0100011`  
+**Hexadecimal Representation:** `0x3A928023`
 
 ---
 
-### 6. **SD s3, 456(sp)**
+### **6. sd s3, 456(sp)**
 
 For the instruction `sd s3, 456(sp)`:
 
 | **Bit**       | **31-25**       | **24-20** | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|-----------|
-| **Value**     | 0000001         | 00000     | 10011     | 000       | 00111     | 0110011   |
-| **Operation** | imm[31:25]      | rs1 (sp)  | rs2 (s3)  | funct3    | rd (s3)   | opcode (SD) |
+| **Field**     | imm[11:5]       | rs2 (s3)  | rs1 (sp)  | funct3    | imm[4:0]  | opcode    |
+| **Value**     | 0111000         | 00011     | 00010     | 011       | 00000     | 0100011   |
 
-**32-bit Representation:** 0000001 00000 10011 000 00111 0110011
+#### **Explanation of Fields:**
+- **imm[11:5]**: Upper 7 bits of `456` (`1110010` in binary), encoded as `0111000`.  
+- **rs2**: `s3` is register `x19`, encoded as `10011`.  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `011` indicates a `sd` operation.  
+- **imm[4:0]**: Lower 5 bits of `456` (`1110010` in binary), encoded as `00000`.  
+- **opcode**: `0100011` is the opcode for store instructions.
+
+#### **32-bit Representation:**
+`0111000 10011 00010 011 00000 0100011`  
+**Hexadecimal Representation:** `0x3A938023`
 
 ---
 
-### 7. **ADDI a3, sp, 272**
+### **7. addi a3, sp, 272**
 
 For the instruction `addi a3, sp, 272`:
 
 | **Bit**       | **31-20**       | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|
-| **Value**     | 000000010000    | 00010     | 000       | 01100     | 0010011   |
-| **Operation** | imm[31:20]      | rs1 (sp)  | funct3    | rd (a3)   | opcode (ADDI) |
+| **Field**     | imm[31:20]      | rs1 (sp)  | funct3    | rd (a3)   | opcode    |
+| **Value**     | 000000010000     | 00010     | 000       | 01100     | 0010011   |
 
-**32-bit Representation:** 000000010000 00010 000 01100 0010011
+#### **Explanation of Fields:**
+- **imm[31:20]**: Upper 12 bits of `272` (`000000010000` in binary).  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `000` indicates an `addi` operation.  
+- **rd**: `a3` is register `x15`, encoded as `01100`.  
+- **opcode**: `0010011` is the opcode for `addi` instructions.
+
+#### **32-bit Representation:**
+`000000010000 00010 000 01100 0010011`  
+**Hexadecimal Representation:** `0x00430313`
 
 ---
 
-### 8. **ADDI a2, sp, 280**
+### **8. addi a2, sp, 280**
 
 For the instruction `addi a2, sp, 280`:
 
 | **Bit**       | **31-20**       | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|
-| **Value**     | 000000010100    | 00010     | 000       | 01000     | 0010011   |
-| **Operation** | imm[31:20]      | rs1 (sp)  | funct3    | rd (a2)   | opcode (ADDI) |
+| **Field**     | imm[31:20]      | rs1 (sp)  | funct3    | rd (a2)   | opcode    |
+| **Value**     | 000000010100     | 00010     | 000       | 01010     | 0010011   |
 
-**32-bit Representation:** 000000010100 00010 000 01000 0010011
+#### **Explanation of Fields:**
+- **imm[31:20]**: Upper 12 bits of `280` (`000000010100` in binary).  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `000` indicates an `addi` operation.  
+- **rd**: `a2` is register `x10`, encoded as `01010`.  
+- **opcode**: `0010011` is the opcode for `addi` instructions.
+
+#### **32-bit Representation:**
+`000000010100 00010 000 01010 0010011`  
+**Hexadecimal Representation:** `0x00530293`
 
 ---
 
-### 9. **ADDI a1, sp, 304**
+### **9. addi a1, sp, 304**
 
 For the instruction `addi a1, sp, 304`:
 
 | **Bit**       | **31-20**       | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|
-| **Value**     | 000000010110    | 00010     | 000       | 01001     | 0010011   |
-| **Operation** | imm[31:20]      | rs1 (sp)  | funct3    | rd (a1)   | opcode (ADDI) |
+| **Field**     | imm[31:20]      | rs1 (sp)  | funct3    | rd (a1)   | opcode    |
+| **Value**     | 000000010110     | 00010     | 000       | 01001     | 0010011   |
 
-**32-bit Representation:** 000000010110 00010 000 01001 0010011
+#### **Explanation of Fields:**
+- **imm[31:20]**: Upper 12 bits of `304` (`000000010110` in binary).  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `000` indicates an `addi` operation.  
+- **rd**: `a1` is register `x11`, encoded as `01001`.  
+- **opcode**: `0010011` is the opcode for `addi` instructions.
+
+#### **32-bit Representation:**
+`000000010110 00010 000 01001 0010011`  
+**Hexadecimal Representation:** `0x00530293`
 
 ---
 
-### 10. **ADDI a0, sp, 328**
+### **10. addi a0, sp, 328**
 
 For the instruction `addi a0, sp, 328`:
 
 | **Bit**       | **31-20**       | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|
-| **Value**     | 000000011000    | 00010     | 000       | 01010     | 0010011   |
-| **Operation** | imm[31:20]      | rs1 (sp)  | funct3    | rd (a0)   | opcode (ADDI) |
+| **Field**     | imm[31:20]      | rs1 (sp)  | funct3    | rd (a0)   | opcode    |
+| **Value**     | 000000011000     | 00010     | 000       | 01010     | 0010011   |
 
-**32-bit Representation:** 000000011000 00010 000 01010 0010011
+#### **Explanation of Fields:**
+- **imm[31:20]**: Upper 12 bits of `328` (`000000011000` in binary).  
+- **rs1**: `sp` is register `x2`, encoded as `00010`.  
+- **funct3**: `000` indicates an `addi` operation.  
+- **rd**: `a0` is register `x10`, encoded as `01010`.  
+- **opcode**: `0010011` is the opcode for `addi` instructions.
+
+#### **32-bit Representation:**
+`000000011000 00010 000 01010 0010011`  
+**Hexadecimal Representation:** `0x00C30293`
+
+---
+
+### **11. jal ra, 10284 <initialize>**
+
+For the instruction `jal ra, 10284 <initialize>`:
+
+| **Bit**       | **31**   | **30-21**     | **20**   | **19-12**     | **11-7** | **6-0**   |
+|---------------|----------|---------------|----------|---------------|----------|-----------|
+| **Field**     | imm[20]  | imm[10:1]     | imm[11]  | imm[19:12]    | rd (ra)  | opcode    |
+| **Value**     | 0        | 0000001011    | 1        | 000010010100  | 00000    | 1101111   |
+
+#### **Explanation of Fields:**
+- **imm[20]**: Immediate bit 20 is `0` (from the offset `10284` in binary).
+- **imm[10:1]**: Bits 10 to 1 of the immediate value `10284`, which are `0000001011`.
+- **imm[11]**: Bit 11 of the immediate value `10284` is `1`.
+- **imm[19:12]**: Bits 19 to 12 of the immediate value `10284`, which are `000010010100`.
+- **rd**: The destination register `ra` is `x1`, encoded as `00000` (since `ra` is used as the link register in the `jal` instruction).
+- **opcode**: `1101111` is the opcode for the `jal` instruction.
+
+#### **32-bit Representation:**
+`0 0000001011 1 000010010100 00000 1101111`  
+**Hexadecimal Representation:** `0x000ACF6F`
 
 ---
 
-### 11. **jal ra,10284 <initialize>**
+### **12. lui a5, 0x22**
 
-For the instruction `jal ra,10284 <initialize>`:
+For the instruction `lui a5, 0x22`:
 
-| **Bit**       | **31-20**       | **19-15** | **14-12** | **11-7**  | **6-0**   |
-|---------------|-----------------|-----------|-----------|-----------|-----------|
-| **Value**     | 00000000000000001010    | 00001     | 000       | 01011     | 1101111   |
-| **Operation** | imm[31:20]      | rs1       | funct3    | rd        | opcode (jal) |
+| **Bit**       | **31-12**   | **11-7**   | **6-0**   |
+|---------------|-------------|------------|-----------|
+| **Field**     | imm[31:12]  | rd (a5)    | opcode    |
+| **Value**     | 000000000010 | 00101      | 0110111   |
 
-**32-bit Representation:** 00000000000000001010 00001 000 01011 1101111
+#### **Explanation of Fields:**
+- **imm[31:12]**: The immediate value `0x22` is extended to fit the 20-bit field. This results in `000000000010`.
+- **rd**: The destination register `a5` corresponds to register `x15`, encoded as `00101`.
+- **opcode**: `0110111` is the opcode for the `lui` instruction.
 
+#### **32-bit Representation:**
+`000000000010 00101 0110111`  
+**Hexadecimal Representation:** `0x00022037`
 
 ---
+
+### **13. addi a5, a5, 960**
+
+For the instruction `addi a5, a5, 960`:
+
+| **Bit**       | **31-20**      | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:20]     | rs1 (a5)  | funct3    | rd (a5)  | opcode    |
+| **Value**     | 000000111100    | 00101     | 000       | 00101    | 0010011   |
+
+#### **Explanation of Fields:**
+- **imm[31:20]**: The immediate value `960` is encoded in binary as `000000111100`.
+- **rs1**: The source register `a5` corresponds to register `x15`, encoded as `00101`.
+- **funct3**: The function code `000` indicates an addition operation.
+- **rd**: The destination register is `a5`, encoded as `00101`.
+- **opcode**: `0010011` is the opcode for the `addi` instruction.
+
+#### **32-bit Representation:**
+`000000111100 00101 000 00101 0010011`  
+**Hexadecimal Representation:** `0x0f502933`
+
+---
+
+### **14. addi a4, sp, 80**
+
+For the instruction `addi a4, sp, 80`:
+
+| **Bit**       | **31-20**      | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:20]     | rs1 (sp)  | funct3    | rd (a4)  | opcode    |
+| **Value**     | 000000001010    | 00010     | 000       | 00100    | 0010011   |
+
+#### **Explanation of Fields:**
+- **imm[31:20]**: The immediate value `80` is encoded in binary as `000000001010`.
+- **rs1**: The source register `sp` corresponds to register `x2`, encoded as `00010`.
+- **funct3**: The function code `000` indicates an addition operation.
+- **rd**: The destination register is `a4`, encoded as `00100`.
+- **opcode**: `0010011` is the opcode for the `addi` instruction.
+
+#### **32-bit Representation:**
+`000000001010 00010 000 00100 0010011`  
+**Hexadecimal Representation:** `0x00a10113`
+
+---
+
+### **15. addi a6, a5, 160**
+
+For the instruction `addi a6, a5, 160`:
+
+| **Bit**       | **31-20**      | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:20]     | rs1 (a5)  | funct3    | rd (a6)  | opcode    |
+| **Value**     | 000000010100    | 00101     | 000       | 00110    | 0010011   |
+
+#### **Explanation of Fields:**
+- **imm[31:20]**: The immediate value `160` is encoded in binary as `000000010100`.
+- **rs1**: The source register `a5` corresponds to register `x5`, encoded as `00101`.
+- **funct3**: The function code `000` indicates an addition operation.
+- **rd**: The destination register is `a6`, encoded as `00110`.
+- **opcode**: `0010011` is the opcode for the `addi` instruction.
+
+#### **32-bit Representation:**
+`000000010100 00101 000 00110 0010011`  
+**Hexadecimal Representation:** `0x00530293`
+
+---
+
+### **16. ld a0, 0(a5)**
+
+For the instruction `ld a0, 0(a5)`:
+
+| **Bit**       | **31-20**      | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:20]     | rs1 (a5)  | funct3    | rd (a0)  | opcode    |
+| **Value**     | 000000000000    | 00101     | 010       | 00000    | 0000011   |
+
+#### **Explanation of Fields:**
+- **imm[31:20]**: The immediate value `0` is encoded in binary as `000000000000`.
+- **rs1**: The source register `a5` corresponds to register `x5`, encoded as `00101`.
+- **funct3**: The function code `010` indicates a load instruction (`LD`).
+- **rd**: The destination register is `a0`, encoded as `00000`.
+- **opcode**: `0000011` is the opcode for load instructions.
+
+#### **32-bit Representation:**
+`000000000000 00101 010 00000 0000011`  
+**Hexadecimal Representation:** `0x0002a003`
+
+---
+
+### **17. ld a1, 8(a5)**
+
+For the instruction `ld a1, 8(a5)`:
+
+| **Bit**       | **31-20**      | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:20]     | rs1 (a5)  | funct3    | rd (a1)  | opcode    |
+| **Value**     | 000000000010    | 00101     | 010       | 00001    | 0000011   |
+
+#### **Explanation of Fields:**
+- **imm[31:20]**: The immediate value `8` is encoded in binary as `000000000010`.
+- **rs1**: The source register `a5` corresponds to register `x5`, encoded as `00101`.
+- **funct3**: The function code `010` indicates a load instruction (`LD`).
+- **rd**: The destination register is `a1`, encoded as `00001`.
+- **opcode**: `0000011` is the opcode for load instructions.
+
+#### **32-bit Representation:**
+`000000000010 00101 010 00001 0000011`  
+**Hexadecimal Representation:** `0x0002a023`
+
+---
+
+### **18. ld a2, 16(a5)**
+
+For the instruction `ld a2, 16(a5)`:
+
+| **Bit**       | **31-20**      | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:20]     | rs1 (a5)  | funct3    | rd (a2)  | opcode    |
+| **Value**     | 000000000100    | 00101     | 010       | 00010    | 0000011   |
+
+#### **Explanation of Fields:**
+- **imm[31:20]**: The immediate value `16` is encoded in binary as `000000000100`.
+- **rs1**: The source register `a5` corresponds to register `x5`, encoded as `00101`.
+- **funct3**: The function code `010` indicates a load instruction (`LD`).
+- **rd**: The destination register is `a2`, encoded as `00010`.
+- **opcode**: `0000011` is the opcode for load instructions.
+
+#### **32-bit Representation:**
+`000000000100 00101 010 00010 0000011`  
+**Hexadecimal Representation:** `0x0002a023`
+
+---
+
+### **19. ld a3, 24(a5)**
+
+For the instruction `ld a3, 24(a5)`:
+
+| **Bit**       | **31-20**      | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:20]     | rs1 (a5)  | funct3    | rd (a3)  | opcode    |
+| **Value**     | 000000000110    | 00101     | 010       | 00011    | 0000011   |
+
+#### **Explanation of Fields:**
+- **imm[31:20]**: The immediate value `24` is encoded in binary as `000000000110`.
+- **rs1**: The source register `a5` corresponds to register `x5`, encoded as `00101`.
+- **funct3**: The function code `010` indicates a load instruction (`LD`).
+- **rd**: The destination register is `a3`, encoded as `00011`.
+- **opcode**: `0000011` is the opcode for load instructions.
+
+#### **32-bit Representation:**
+`000000000110 00101 010 00011 0000011`  
+**Hexadecimal Representation:** `0x0002a023`
+
+---
+
+### **20. sd a0, 0(a4)**
+
+For the instruction `sd a0, 0(a4)`:
+
+| **Bit**       | **31-25**      | **24-20** | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:25]     | rs2 (a0)  | rs1 (a4)  | funct3    | imm[4:0] | opcode    |
+| **Value**     | 0000000        | 00000     | 00100     | 011       | 00000    | 0100011   |
+
+#### **Explanation of Fields:**
+- **imm[31:25]**: The immediate value `0` is encoded as `0000000` for the higher 7 bits.
+- **rs2**: The source register `a0` corresponds to register `x10`, encoded as `00000`.
+- **rs1**: The base register `a4` corresponds to register `x4`, encoded as `00100`.
+- **funct3**: The function code `011` indicates a store double word instruction (`SD`).
+- **imm[4:0]**: The immediate value `0` is encoded in binary as `00000` for the lower 5 bits.
+- **opcode**: `0100011` is the opcode for store instructions.
+
+#### **32-bit Representation:**
+`0000000 00000 00100 011 00000 0100011`  
+**Hexadecimal Representation:** `0x00024223`
+
+---
+
+
+### **21. sd a1, 8(a4)**
+
+For the instruction `sd a1, 8(a4)`:
+
+| **Bit**       | **31-25**      | **24-20** | **19-15** | **14-12** | **11-7** | **6-0**   |
+|---------------|----------------|-----------|-----------|-----------|----------|-----------|
+| **Field**     | imm[31:25]     | rs2 (a1)  | rs1 (a4)  | funct3    | imm[4:0] | opcode    |
+| **Value**     | 0000000        | 00011     | 00100     | 011       | 01000    | 0100011   |
+
+#### **Explanation of Fields:**
+- **imm[31:25]**: The immediate value `8` is encoded as `0000000` for the higher 7 bits.
+- **rs2**: The source register `a1` corresponds to register `x11`, encoded as `00011`.
+- **rs1**: The base register `a4` corresponds to register `x4`, encoded as `00100`.
+- **funct3**: The function code `011` indicates a store double word instruction (`SD`).
+- **imm[4:0]**: The immediate value `8` is encoded in binary as `01000` for the lower 5 bits.
+- **opcode**: `0100011` is the opcode for store instructions.
+
+#### **32-bit Representation:**
+`0000000 00011 00100 011 01000 0100011`  
+**Hexadecimal Representation:** `0x00324223`
+
+---
+
+
+
+
+
+
+
+
+
+
 
 
 
