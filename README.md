@@ -2,8 +2,8 @@
 ---
 
 Details 
-## Task 1: 
----
+## Task 1
+
 ### Step 1: Create the Program file 
 Created a file named `sum1ton.c` in the home folder, typed a C code to compute the sum of numbers from 1 to n using a text editor, and saved it.
     ![c_code](https://github.com/user-attachments/assets/bfd3de06-efef-4f54-ac66-f96ebd0ed2ba)
@@ -428,5 +428,9 @@ The RV32I instruction set architecture (ISA) in RISC-V is made up of several typ
 | **B-Type**           | imm[12] | rs2 | rs1 | funct3 | imm[10:5] | imm[4:1] | imm[11] | | `BEQ`, `BNE`, `BLT`    |
 | **U-Type**           | imm | rd | opcode | | `LUI`, `AUIPC`         |
 | **J-Type**           | imm | rd | opcode | | `JAL`                  |
+
+---
+
+## Encoding Branch Prediction Using a Neural Network Application Instructions
 
 ---
