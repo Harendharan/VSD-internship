@@ -249,16 +249,12 @@ int main() {
 
 ---
 
----
-
 ####  Compile the C code using the RISC-V compiler ( -O1)
   ```
   $ riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o bpnn.o bpnn.c
   $ ls -ltr bpnn.o
   ```
 ![task2pic2](https://github.com/user-attachments/assets/dd4e62ac-7fee-4034-aeb3-0a3d69c166f9)
-
----
 
 ---
 
@@ -270,15 +266,11 @@ int main() {
 
 ---
 
----
-
 ####  Compile the C code using the RISC-V compiler (-Ofast) 
   ```
   $ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o bpnn.o bpnn.c
   ```
 ![task2pic4](https://github.com/user-attachments/assets/44512c5a-b8b8-4c19-8bf3-d862352252be)
-
----
 
 ---
 
@@ -290,8 +282,6 @@ int main() {
 
 ---
 
----
-
 ####  Observe the ouput given by RISC V Compiler
   ```
   $ spike pk bpnn.o
@@ -300,15 +290,11 @@ int main() {
 
 ---
 
----
-
 ####  Inspect the Stack pointerin the  Assembly Code of the Main Function (-Ofast)
   ```
   $ riscv64-unknown-elf-objdump -d bpnn.o | less
   ```
 ![task2pic7](https://github.com/user-attachments/assets/9d91196d-f9fa-4fbb-bb1f-9347ad47a02e)
-
----
 
 ---
 
