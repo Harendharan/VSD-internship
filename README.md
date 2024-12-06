@@ -342,7 +342,7 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 | **Bit**  | 31-20      | 19-15     | 14-12     | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|-----------|-----------|
 | **Field**| imm[11:0]        | rs1       | funct3    | rd        | opcode    |
-| **Description** | Immediate bits | Source Register 1 | Function code (defines operation) | Destination Register | Operation code |
+| **Description** | Immediate bits [11:0] | Source Register 1 | Function code (defines operation) | Destination Register | Operation code |
 
 ![WhatsApp Image 2024-12-06 at 16 57 30_40e1abd6](https://github.com/user-attachments/assets/3e567cf2-00eb-4711-b30e-c760c5402fc4)
 
@@ -353,7 +353,7 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 | **Bit**  | 31-25      | 24-20     | 19-15     | 14-12     | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|-----------|-----------|-----------|
 | **Field**| imm[11:5]  | rs2       | rs1       | funct3    | imm[4:0]  | opcode    |
-| **Description** | Immediate bits  | Source Register 2 | Source Register 1 | Function code (defines operation) | Immediate bits  | Operation code |
+| **Description** | Immediate bits [11:5]  | Source Register 2 | Source Register 1 | Function code (defines operation) | Immediate bits [4:0]  | Operation code |
 
 ![WhatsApp Image 2024-12-06 at 17 45 13_a0fbc9ab](https://github.com/user-attachments/assets/c330e2d7-7bb2-4de2-adf2-5df40744aa8a)
 
@@ -364,7 +364,7 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 | **Bit**  |    31     | 30-25     | 24-20     | 19-15     | 14-12      | 11-8       |    7     | 6-0       |
 |----------|------------|-----------|-----------|-----------|-----------|-----------|---------|---------|
 | **Field**| imm[12]    | imm[10:5]       | rs2       | rs1    | funct3 | imm[4:1]  | imm[11] | opcode |
-| **Description** | Immediate bit | Immediate bits |  Source Register 2 | Source Register 1 | Function code (defines operation) | Immediate bits | Immediate bit | Operation code |
+| **Description** | Immediate bit [12] | Immediate bits [10:5] |  Source Register 2 | Source Register 1 | Function code (defines operation) | Immediate bits [4:1] | Immediate bit [11] | Operation code |
 
 ![WhatsApp Image 2024-12-06 at 17 07 25_e8674253](https://github.com/user-attachments/assets/4c8c579e-7866-460b-bf88-f5c4b0ed3e33)
 
@@ -375,8 +375,8 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 
 | **Bit**  | 31-12      | 11-7      | 6-0       |
 |----------|------------|-----------|-----------|
-| **Field**| imm[31-12]      | rd        | opcode    |
-| **Description** | Immediate bits | Destination Register | Operation code |
+| **Field**| imm[31-12] | rd        | opcode    |
+| **Description** | Immediate bits [31-12] | Destination Register | Operation code |
 
 ![WhatsApp Image 2024-12-06 at 17 54 28_8d65a2a1](https://github.com/user-attachments/assets/27904b7f-6048-4e82-855d-d7ed5ec24260)
 
@@ -384,10 +384,10 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 
 ## J-Type Instruction Format
 
-| **Bit**  | 31-12      | 11-7      | 6-0       |
-|----------|------------|-----------|-----------|
-| **Field**| {imm[20],imm[10:1],imm[11],imm[19:12]}       | rd        | opcode    |
-| **Description** | Immediate bits  | Destination Register | Operation code |
+| **Bit**  | 31         | 30-21     | 20        | 19-12      |  11-7     |  6-0      |
+|----------|------------|-----------|-----------|------------|-----------|-----------|
+| **Field**| imm[20]    | imm[10:1] |  imm[11]  | imm[19:12] | rd        | opcode    |
+| **Description** | Immediate bit [20] | Immediate bits [10:1] |Immediate bit [11] |Immediate bits [19:12] | Destination Register | Operation code |
 
 ![WhatsApp Image 2024-12-06 at 17 54 28_19a3ba51](https://github.com/user-attachments/assets/7a90011d-b24e-452c-9063-2a1d51181c5d)
 
