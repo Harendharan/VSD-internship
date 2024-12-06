@@ -398,7 +398,7 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 
 ### **1. addi sp, sp, -496**
 
-For the instruction `addi sp, sp, -496`:
+For the **I-Type** instruction `addi sp, sp, -496`:
 
 | **Bit**       | **31-20**       | **19-15** | **14-12** | **11-7**  | **6-0**   |
 |---------------|-----------------|-----------|-----------|-----------|-----------|
