@@ -364,7 +364,7 @@ Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
 | **Bit**  |    31     | 30-25     | 24-20     | 19-15     | 14-12      | 11-8       |    7     | 6-0       |
 |----------|------------|-----------|-----------|-----------|-----------|-----------|---------|---------|
 | **Field**| imm[12]    | imm[10:5]       | rs2       | rs1    | funct3 | imm[4:1]  | imm[11] | opcode |
-| **Description** | Immediate bit | Immediate bits |  Source Register 2 | Source Register 2 | Source Register 1 | Function code (defines operation) | Immediate bits | Immediate bit | Operation code |
+| **Description** | Immediate bit | Immediate bits |  Source Register 2 | Source Register 1 | Function code (defines operation) | Immediate bits | Immediate bit | Operation code |
 
 ![WhatsApp Image 2024-12-06 at 17 07 25_e8674253](https://github.com/user-attachments/assets/4c8c579e-7866-460b-bf88-f5c4b0ed3e33)
 
