@@ -319,3 +319,92 @@ int main() {
 ![task2pic8](https://github.com/user-attachments/assets/20470995-d3b2-415b-88a7-8e810bb4af90)
 
 ---
+
+## RISC-V Instruction Types
+
+The RISC-V instruction set is divided into several categories based on the operation and the type of operands. Below are the key instruction types:
+
+### 1. R-Type (Register Type)
+
+R-Type instructions are used for operations that involve two source registers and one destination register. These operations typically include arithmetic and logical functions such as addition, subtraction, bitwise operations, and comparisons.
+
+| Bits      | 31:25   | 24:20  | 19:15  | 14:12  | 11:7   | 6:0    |
+|-----------|---------|--------|--------|--------|--------|--------|
+| Field     | funct7  | rs2    | rs1    | funct3 | rd     | opcode |
+| Description | Function Field (used for operation variants) | Second Source Register | First Source Register | Function Field (used for operation type) | Destination Register | Operation Code |
+
+**Examples**:
+- `ADD`, `SUB`, `AND`, `OR`, `XOR`, `SLL`, etc.
+
+---
+
+### 2. I-Type (Immediate Type)
+
+I-Type instructions involve an immediate value (a constant) along with a source register. These are used in operations such as loading data from memory, performing arithmetic with an immediate value, or setting values directly in a register.
+
+| Bits      | 31:20   | 19:15  | 14:12  | 11:7   | 6:0    |
+|-----------|---------|--------|--------|--------|--------|
+| Field     | imm[11:0] | rs1    | funct3 | rd     | opcode |
+| Description | 12-bit Immediate Value | Source Register | Operation Type (used to specify the type of operation) | Destination Register | Operation Code |
+
+**Examples**:
+- `ADDI` (Add Immediate), `SLTI` (Set Less Than Immediate), `ANDI` (AND Immediate), `ORI` (OR Immediate), `LB` (Load Byte), etc.
+
+
+---
+
+### 3. S-Type (Store Type)
+
+S-Type instructions are used to store data into memory. These instructions involve a source register, an immediate offset, and a base register to specify the memory location where data will be stored.
+
+| Bits      | 31:25   | 24:20  | 19:15  | 14:12  | 11:7   | 6:0    |
+|-----------|---------|--------|--------|--------|--------|--------|
+| Field     | imm[11:5] | rs2   | rs1    | funct3 | imm[4:0] | opcode |
+| Description | Upper 7 bits of Immediate | Second Source Register | First Source Register | Operation type field | Lower 5 bits of Immediate | S-Type opcode (e.g., STORE) |
+
+**Examples**:
+- `SW` (Store Word), `SH` (Store Halfword), etc.
+
+---
+
+### 4. B-Type (Branch Type)
+
+B-Type instructions are used for conditional branching. These instructions compare two registers and, depending on the result, determine whether to branch or not.
+
+| Bits      | 31       | 30:25   | 24:20  | 19:15  | 14:12  | 11:8   | 7       | 6:0    |
+|-----------|----------|---------|--------|--------|--------|--------|---------|--------|
+| Field     | imm[12]  | imm[10:5] | rs2    | rs1    | funct3 | imm[4:1] | imm[11] | opcode |
+| Description | Sign Bit for Offset | Offset (MSBs) | Second Source Register (for comparison) | First Source Register (for comparison) | Branch condition type (e.g., BEQ, BNE) | Offset (LSBs) | Offset (bit 11) | Branch opcode (e.g., BRANCH) |
+
+**Examples**:
+- `BEQ` (Branch if Equal), `BNE` (Branch if Not Equal), etc.
+
+---
+
+### 5. U-Type (Upper Immediate Type)
+
+U-Type instructions are used for setting the upper 20 bits of a register. These instructions are commonly used for initializing pointers or addresses.
+
+| Bits      | 31:12   | 11:7    | 6:0    |
+|-----------|---------|---------|--------|
+| Field     | imm[31:12] | rd     | opcode |
+| Description | Upper 20 bits of Immediate | Destination Register | Operation Code |
+
+**Examples**:
+- `LUI` (Load Upper Immediate), `AUIPC` (Add Upper Immediate to PC)
+
+---
+
+### 6. J-Type (Jump Type)
+
+J-Type instructions are used for unconditional jump operations. These instructions transfer control to a target address, often used for subroutine calls.
+
+| Bits      | 31       | 30:21   | 20   | 19:12   | 11:7       | 6:0    |
+|-----------|----------|---------|--------|--------|---------|--------|
+| Field     | imm[20]  | imm[10:1] | imm[11] | imm[19:12] | rd | opcode |
+| Description | Most significant bit of 20-bit immediate | Middle portion of immediate | A bit of the immediate for offset | Upper bits of Immediate | Destination register | opcode |
+
+**Examples**:
+- `JAL` (Jump and Link), `JALR` (Jump and Link Register)
+
+---
