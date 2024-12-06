@@ -320,91 +320,127 @@ int main() {
 
 ---
 
-## RISC-V Instruction Types
+# Task2
 
-The RISC-V instruction set is divided into several categories based on the operation and the type of operands. Below are the key instruction types:
+## RISC-V ISA
 
-### 1. R-Type (Register Type)
+The RV32I instruction set architecture (ISA) in RISC-V is made up of several types of instructions, which can be classified based on their functionalities and encoding formats. Below is a summary and classification of the various instructions, their groupings by bits, and the combinations defined for each function in the recent RV32I specification (May 2024).
 
-R-Type instructions are used for operations that involve two source registers and one destination register. These operations typically include arithmetic and logical functions such as addition, subtraction, bitwise operations, and comparisons.
-
-| Bits      | 31:25   | 24:20  | 19:15  | 14:12  | 11:7   | 6:0    |
-|-----------|---------|--------|--------|--------|--------|--------|
-| Field     | funct7  | rs2    | rs1    | funct3 | rd     | opcode |
-| Description | Function Field (used for operation variants) | Second Source Register | First Source Register | Function Field (used for operation type) | Destination Register | Operation Code |
-
-**Examples**:
-- `ADD`, `SUB`, `AND`, `OR`, `XOR`, `SLL`, etc.
+### Types of Instructions in RV32I:
+- **R-Type Instructions**
+- **I-Type Instructions**
+- **S-Type Instructions**
+- **B-Type Instructions**
+- **U-Type Instructions**
+- **J-Type Instructions**
 
 ---
 
-### 2. I-Type (Immediate Type)
+## R-Type Instruction Format
 
-I-Type instructions involve an immediate value (a constant) along with a source register. These are used in operations such as loading data from memory, performing arithmetic with an immediate value, or setting values directly in a register.
+| **Bit**  | 31-25      | 24-20     | 19-15     | 14-12     | 11-7      | 6-0       |
+|----------|------------|-----------|-----------|-----------|-----------|-----------|
+| **Field**| funct7     | rs2       | rs1       | funct3    | rd        | opcode    |
+| **Description** | Function code (7 bits) | Source Register 2 (5 bits) | Source Register 1 (5 bits) | Function code (3 bits) | Destination Register (5 bits) | Operation code (7 bits) |
 
-| Bits      | 31:20   | 19:15  | 14:12  | 11:7   | 6:0    |
-|-----------|---------|--------|--------|--------|--------|
-| Field     | imm[11:0] | rs1    | funct3 | rd     | opcode |
-| Description | 12-bit Immediate Value | Source Register | Operation Type (used to specify the type of operation) | Destination Register | Operation Code |
+#### Example for R-Type (ADD):
 
-**Examples**:
-- `ADDI` (Add Immediate), `SLTI` (Set Less Than Immediate), `ANDI` (AND Immediate), `ORI` (OR Immediate), `LB` (Load Byte), etc.
-
-
----
-
-### 3. S-Type (Store Type)
-
-S-Type instructions are used to store data into memory. These instructions involve a source register, an immediate offset, and a base register to specify the memory location where data will be stored.
-
-| Bits      | 31:25   | 24:20  | 19:15  | 14:12  | 11:7   | 6:0    |
-|-----------|---------|--------|--------|--------|--------|--------|
-| Field     | imm[11:5] | rs2   | rs1    | funct3 | imm[4:0] | opcode |
-| Description | Upper 7 bits of Immediate | Second Source Register | First Source Register | Operation type field | Lower 5 bits of Immediate | S-Type opcode (e.g., STORE) |
-
-**Examples**:
-- `SW` (Store Word), `SH` (Store Halfword), etc.
+| **Bit**  | 31-25    | 24-20    | 19-15    | 14-12    | 11-7     | 6-0      |
+|----------|----------|----------|----------|----------|----------|----------|
+| **Value**| 0000000  | 00000    | 00000    | 000      | 00000    | 0110011 |
+| **Operation** | ADD      |          |          | funct3    | rd (destination) | opcode (ADD)  |
 
 ---
 
-### 4. B-Type (Branch Type)
+## I-Type Instruction Format
 
-B-Type instructions are used for conditional branching. These instructions compare two registers and, depending on the result, determine whether to branch or not.
+| **Bit**  | 31-20      | 19-15     | 14-12     | 11-7      | 6-0       |
+|----------|------------|-----------|-----------|-----------|-----------|
+| **Field**| imm        | rs1       | funct3    | rd        | opcode    |
+| **Description** | Immediate value (12 bits) | Source Register 1 (5 bits) | Function code (3 bits) | Destination Register (5 bits) | Operation code (7 bits) |
 
-| Bits      | 31       | 30:25   | 24:20  | 19:15  | 14:12  | 11:8   | 7       | 6:0    |
-|-----------|----------|---------|--------|--------|--------|--------|---------|--------|
-| Field     | imm[12]  | imm[10:5] | rs2    | rs1    | funct3 | imm[4:1] | imm[11] | opcode |
-| Description | Sign Bit for Offset | Offset (MSBs) | Second Source Register (for comparison) | First Source Register (for comparison) | Branch condition type (e.g., BEQ, BNE) | Offset (LSBs) | Offset (bit 11) | Branch opcode (e.g., BRANCH) |
+#### Example for I-Type (ADDI):
 
-**Examples**:
-- `BEQ` (Branch if Equal), `BNE` (Branch if Not Equal), etc.
-
----
-
-### 5. U-Type (Upper Immediate Type)
-
-U-Type instructions are used for setting the upper 20 bits of a register. These instructions are commonly used for initializing pointers or addresses.
-
-| Bits      | 31:12   | 11:7    | 6:0    |
-|-----------|---------|---------|--------|
-| Field     | imm[31:12] | rd     | opcode |
-| Description | Upper 20 bits of Immediate | Destination Register | Operation Code |
-
-**Examples**:
-- `LUI` (Load Upper Immediate), `AUIPC` (Add Upper Immediate to PC)
+| **Bit**  | 31-20    | 19-15    | 14-12    | 11-7     | 6-0      |
+|----------|----------|----------|----------|----------|----------|
+| **Value**| 000000000000 | 00000    | 000      | 00000    | 0010011 |
+| **Operation** | ADDI     |          | funct3    | rd (destination) | opcode (ADDI)  |
 
 ---
 
-### 6. J-Type (Jump Type)
+## S-Type Instruction Format
 
-J-Type instructions are used for unconditional jump operations. These instructions transfer control to a target address, often used for subroutine calls.
+| **Bit**  | 31-25      | 24-20     | 19-15     | 14-12     | 11-7      | 6-0       |
+|----------|------------|-----------|-----------|-----------|-----------|-----------|
+| **Field**| imm[11:5]  | rs2       | rs1       | funct3    | imm[4:0]  | opcode    |
+| **Description** | Immediate bits [11:5] (7 bits) | Source Register 2 (5 bits) | Source Register 1 (5 bits) | Function code (3 bits) | Immediate bits [4:0] (5 bits) | Operation code (7 bits) |
 
-| Bits      | 31       | 30:21   | 20   | 19:12   | 11:7       | 6:0    |
-|-----------|----------|---------|--------|--------|---------|--------|
-| Field     | imm[20]  | imm[10:1] | imm[11] | imm[19:12] | rd | opcode |
-| Description | Most significant bit of 20-bit immediate | Middle portion of immediate | A bit of the immediate for offset | Upper bits of Immediate | Destination register | opcode |
+#### Example for S-Type (SB):
 
-**Examples**:
-- `JAL` (Jump and Link), `JALR` (Jump and Link Register)
+| **Bit**  | 31-25    | 24-20    | 19-15    | 14-12    | 11-7     | 6-0      |
+|----------|----------|----------|----------|----------|----------|----------|
+| **Value**| 0000000  | 00000    | 00000    | 000      | 00000    | 0100011 |
+| **Operation** | SB (Store Byte) |          | funct3    | opcode (SB)  |
+
+---
+
+## B-Type Instruction Format
+
+| **Bit**  | 31-25      | 24-20     | 19-15     | 14-12     | 11-8      | 7-1       | 0       |
+|----------|------------|-----------|-----------|-----------|-----------|-----------|---------|
+| **Field**| imm[12]    | rs2       | rs1       | funct3    | imm[10:5] | imm[4:1]  | imm[11] |
+| **Description** | Immediate bit [12] (1 bit) | Source Register 2 (5 bits) | Source Register 1 (5 bits) | Function code (3 bits) | Immediate bits [10:5] (6 bits) | Immediate bits [4:1] (4 bits) | Immediate bit [11] (1 bit) |
+
+#### Example for B-Type (BEQ):
+
+| **Bit**  | 31-25    | 24-20    | 19-15    | 14-12    | 11-8     | 7-1      | 0       |
+|----------|----------|----------|----------|----------|----------|----------|---------|
+| **Value**| 0000000  | 00000    | 00000    | 000      | 000000   | 0001     | 0       |
+| **Operation** | BEQ (Branch if Equal) |          | funct3    | opcode (BEQ)  |
+
+---
+
+## U-Type Instruction Format
+
+| **Bit**  | 31-12      | 11-7      | 6-0       |
+|----------|------------|-----------|-----------|
+| **Field**| imm        | rd        | opcode    |
+| **Description** | Immediate value (20 bits) | Destination Register (5 bits) | Operation code (7 bits) |
+
+#### Example for U-Type (LUI):
+
+| **Bit**  | 31-12    | 11-7     | 6-0      |
+|----------|----------|----------|----------|
+| **Value**| 000000000000 | 00000    | 0110111 |
+| **Operation** | LUI      |          | opcode (LUI)  |
+
+---
+
+## J-Type Instruction Format
+
+| **Bit**  | 31-12      | 11-7      | 6-0       |
+|----------|------------|-----------|-----------|
+| **Field**| imm        | rd        | opcode    |
+| **Description** | Immediate value (20 bits) | Destination Register (5 bits) | Operation code (7 bits) |
+
+#### Example for J-Type (JAL):
+
+| **Bit**  | 31-12    | 11-7     | 6-0      |
+|----------|----------|----------|----------|
+| **Value**| 000000000000 | 00000    | 1101111 |
+| **Operation** | JAL (Jump and Link) |          | opcode (JAL)  |
+
+---
+
+## Summary of Instruction Formats:
+
+| **Instruction Type** | **Bit Position (31-0)**       | **Example**              |
+|----------------------|-------------------------------|--------------------------|
+| **R-Type**           | funct7 | rs2 | rs1 | funct3 | rd | opcode | | `ADD`, `SUB`           |
+| **I-Type**           | imm | rs1 | funct3 | rd | opcode | | `ADDI`, `XORI`         |
+| **S-Type**           | imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode | | `SB`, `SH`, `SW`       |
+| **B-Type**           | imm[12] | rs2 | rs1 | funct3 | imm[10:5] | imm[4:1] | imm[11] | | `BEQ`, `BNE`, `BLT`    |
+| **U-Type**           | imm | rd | opcode | | `LUI`, `AUIPC`         |
+| **J-Type**           | imm | rd | opcode | | `JAL`                  |
 
 ---
