@@ -290,7 +290,7 @@ int main() {
 
 ---
 
-####  Inspect the Stack pointerin the  Assembly Code of the Main Function (-Ofast)
+####  Inspect the Stack pointer in the  Assembly Code of the Main Function (-Ofast)
   ```
   $ riscv64-unknown-elf-objdump -d bpnn.o | less
   ```
