@@ -322,6 +322,8 @@ The RV32I instruction set architecture (ISA) in RISC-V is made up of several typ
 
 ![WhatsApp Image 2024-12-06 at 15 45 43_7140aa82](https://github.com/user-attachments/assets/02cee157-e459-47ee-a6b9-d199ba388c78)
 
+Ref: The RISC-V Instruction Set Manual Volume I | © RISC-V
+
 ---
 
 ## R-Type Instruction Format
