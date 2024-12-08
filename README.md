@@ -915,7 +915,7 @@ Value of general purpose registers before running the program (As per the design
 | REG[3]       | 0x00000003       | 3                   |
 | REG[4]       | 0x00000004       | 4                   |
 | REG[5]       | 0x00000005       | 5                   |
-| REG[6]       | 0x00000006       | 6                   | ←
+| REG[6]       | 0x00000006       | 6                   | 
 
 #### Instruction 1: add r6, r1, r2  
 
@@ -933,7 +933,7 @@ Value of general purpose registers before running the program (As per the design
 | REG[6]       | 0x00000003       | 3                   |
 
 ```
-R6 = R1 + R2 = 1 + 2 = 3
+REG[6] = REG[1] + REG[2] = 1 + 2 = 3
 ```
 
 **STATUS: VERIFIED**
@@ -954,6 +954,10 @@ R6 = R1 + R2 = 1 + 2 = 3
 | REG[6]       | 0x00000003       | 3                   |
 | REG[7]       | 0xFFFFFFFF       | -1                  |
 
+```
+REG[7] = REG[1] - REG[2] = 1 - 2 = -1
+```
+
 **STATUS: VERIFIED**
 
 #### Instruction 3: and r8, r1, r3
@@ -972,6 +976,10 @@ R6 = R1 + R2 = 1 + 2 = 3
 | REG[6]       | 0x00000003       | 3                   |
 | REG[7]       | 0xFFFFFFFF       | -1                  |
 | REG[8]       | 0x00000001       | 1                   |
+
+```
+REG[8] = REG[1] AND REG[3] = 1 AND 3 = 01 AND 11 = 01 = 1 (decimal) 
+```
 
 **STATUS: VERIFIED**
 
@@ -992,6 +1000,10 @@ R6 = R1 + R2 = 1 + 2 = 3
 | REG[7]       | 0xFFFFFFFF       | -1                  |
 | REG[8]       | 0x00000001       | 1                   |
 | REG[9]       | 0x00000007       | 7                   |
+
+```
+REG[9] = REG[2] OR REG[5] = 2 OR 5 = 010 OR 101 = 111 = 7 (decimal) 
+```
 
 **STATUS: VERIFIED**
 
@@ -1014,12 +1026,21 @@ R6 = R1 + R2 = 1 + 2 = 3
 | REG[9]       | 0x00000007       | 7                   |
 | REG[10]      | 0x00000005       | 5                   |
 
+```
+REG[10] = REG[1] XOR REG[4] = 1 XOR 4 = 001 OR 100 = 101 = 5 (decimal) 
+```
+
 **STATUS: VERIFIED**
 
 #### Instruction 6: slt r11, r2, r4  
 
 ![in6](https://github.com/user-attachments/assets/604450bb-8b33-414b-a59a-611ca579c12c)
 
+```
+REG[2] = 2 (0x00000002)
+REG[4] = 4 (0x00000004)
+Since 2 < 4, the slt instruction will set REG[11] to 1
+```
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -1042,6 +1063,11 @@ R6 = R1 + R2 = 1 + 2 = 3
 
 ![in7](https://github.com/user-attachments/assets/7e90ff88-e93d-4a0b-bf1c-50880de82dc1)
 
+```
+REG[4] = 4 (0x00000004)
+Immediate value = 5
+REG[12] = REG[4] + 5 = 4 + 5 = 9
+```
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|---------------------|
@@ -1062,6 +1088,13 @@ R6 = R1 + R2 = 1 + 2 = 3
 **STATUS: VERIFIED**
 
 #### Instruction 8: sw r3, 2(r1)
+
+![in8](https://github.com/user-attachments/assets/6b34f0ad-173f-4e8d-8fad-76a93a729531)
+
+- REG[3] = 3 (0x00000003)
+- REG[1] = 1 (0x00000001)
+- The instruction performs: address = REG[1] + 2 = 1 + 2 = 3
+- So, the value REG[3] = 3 will be stored at memory location MEM[3] (address 3)
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|---------------------|
@@ -1087,6 +1120,13 @@ R6 = R1 + R2 = 1 + 2 = 3
 **STATUS: VERIFIED**
 
 #### Instruction 9: lw r13, 2(r1)
+
+![in9](https://github.com/user-attachments/assets/bbedf59d-02c6-44ef-b1da-5d34533c300a)
+
+- R1 = 1 (0x00000001)
+- Memory at address R1 + 2 = 1 + 2 = 3, which is MEM[3]
+- From the previous sw instruction, MEM[3] = 0x00000003
+- So, the value at MEM[3] (which is 0x00000003) will be loaded into REG[13].
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|---------------------|
@@ -1114,6 +1154,11 @@ R6 = R1 + R2 = 1 + 2 = 3
 
 #### Instruction 10: beq r0, r0, 15 
 
+- REG[0] = 0 (0x00000000)
+- The beq instruction compares r0 with r0, and since both are equal (both are 0), the branch is taken.
+- The instruction specifies a branch offset of 15, so the program will jump to address 15 in the instruction memory.
+- No changes in the table
+
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|---------------------|
 | REG[0]       | 0x00000000       | 0                   |
@@ -1139,6 +1184,14 @@ R6 = R1 + R2 = 1 + 2 = 3
 **STATUS: VERIFIED**
 
 #### Instruction 11: add r14, r2, r2 
+
+![in11](https://github.com/user-attachments/assets/5466a591-39ba-4513-8174-04bf51d8fc8e)
+
+
+- REG[2] = 0x00000002 (2 in decimal)
+- So, r2 + r2 = 2 + 2 = 4
+- After executing the instruction, REG[14] will be updated with the value 4 (0x00000004 in hex).
+
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|---------------------|
