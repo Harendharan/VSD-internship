@@ -867,9 +867,9 @@ For the instruction `sd a1, 8(a4)`:
 
 ## Task 4
 
-## Functional simulation of the given design code of pipelined RISC V 32I Processor
+### Functional simulation of the given design code of pipelined RISC V 32I Processor
 
-### Initial steps
+#### Initial steps
 
 - Both design and testbench codes are saved in a separate folder
 - To simulate the verilog code
@@ -884,6 +884,14 @@ $ gtkwave iiitb_rv32i.vcd
 ```
 
 ![task4pic1](https://github.com/user-attachments/assets/c1dba9ef-1fdd-4c76-8024-1f3dc78382f5)
+
+---
+
+Analayzing the hex code given by the designer in the instruction memory
+
+![image](https://github.com/user-attachments/assets/efb001c0-aed8-44f2-864d-896c4151fbf9)
+
+
 
 
 
