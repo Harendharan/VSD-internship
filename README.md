@@ -905,7 +905,7 @@ $ gtkwave iiitb_rv32i.vcd
 
 ### Verifying each instructions using the waveform
 
-Value of general purpose registers before running the program
+Value of general purpose registers before running the program (As per the design code)
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -915,14 +915,11 @@ Value of general purpose registers before running the program
 | REG[3]       | 0x00000003       | 3                   |
 | REG[4]       | 0x00000004       | 4                   |
 | REG[5]       | 0x00000005       | 5                   |
-| REG[6]       | 0x00000006       | 6                   |
+| REG[6]       | 0x00000006       | 6                   | ←
 
 #### Instruction 1: add r6, r1, r2  
 
 ![in1](https://github.com/user-attachments/assets/0362eedf-8249-4b89-b252-fa5d375548f7)
-
-
-![image](https://github.com/user-attachments/assets/19dd958b-06d5-40ca-b07d-0e2c230988b2)
 
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
@@ -935,8 +932,16 @@ Value of general purpose registers before running the program
 | REG[5]       | 0x00000005       | 5                   |
 | REG[6]       | 0x00000003       | 3                   |
 
+```
+R6 = R1 + R2 = 1 + 2 = 3
+```
+
+**STATUS: VERIFIED**
 
 #### Instruction 2: sub r7, r1, r2
+
+![in2](https://github.com/user-attachments/assets/8cbfe1b1-4933-411c-948d-1f1b7e20c60e)
+
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -949,8 +954,12 @@ Value of general purpose registers before running the program
 | REG[6]       | 0x00000003       | 3                   |
 | REG[7]       | 0xFFFFFFFF       | -1                  |
 
+**STATUS: VERIFIED**
 
 #### Instruction 3: and r8, r1, r3
+
+![in3](https://github.com/user-attachments/assets/aa25ca12-7163-44de-ad97-6939daee59d3)
+
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -964,8 +973,12 @@ Value of general purpose registers before running the program
 | REG[7]       | 0xFFFFFFFF       | -1                  |
 | REG[8]       | 0x00000001       | 1                   |
 
+**STATUS: VERIFIED**
 
 #### Instruction 4: or r9, r2, r5
+
+![in4](https://github.com/user-attachments/assets/718af532-02c0-45b6-8d9e-a4901b59260d)
+
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -980,8 +993,12 @@ Value of general purpose registers before running the program
 | REG[8]       | 0x00000001       | 1                   |
 | REG[9]       | 0x00000007       | 7                   |
 
+**STATUS: VERIFIED**
 
 #### Instruction 5: xor r10, r1, r4 
+
+![in5](https://github.com/user-attachments/assets/284d60d7-5552-4977-b6dc-551714604ad8)
+
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -997,8 +1014,12 @@ Value of general purpose registers before running the program
 | REG[9]       | 0x00000007       | 7                   |
 | REG[10]      | 0x00000005       | 5                   |
 
+**STATUS: VERIFIED**
 
 #### Instruction 6: slt r11, r2, r4  
+
+![in6](https://github.com/user-attachments/assets/604450bb-8b33-414b-a59a-611ca579c12c)
+
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -1015,8 +1036,12 @@ Value of general purpose registers before running the program
 | REG[10]      | 0x00000005       | 5                   |
 | REG[11]      | 0x00000001       | 1                   |
 
+**STATUS: VERIFIED**
 
 #### Instruction 7: addi r12, r4, 5 
+
+![in7](https://github.com/user-attachments/assets/7e90ff88-e93d-4a0b-bf1c-50880de82dc1)
+
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|---------------------|
@@ -1034,6 +1059,7 @@ Value of general purpose registers before running the program
 | REG[11]      | 0x00000001       | 1                   |
 | REG[12]      | 0x00000009       | 9                   |
 
+**STATUS: VERIFIED**
 
 #### Instruction 8: sw r3, 2(r1)
 
@@ -1058,6 +1084,7 @@ Value of general purpose registers before running the program
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
+**STATUS: VERIFIED**
 
 #### Instruction 9: lw r13, 2(r1)
 
@@ -1083,6 +1110,7 @@ Value of general purpose registers before running the program
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
+**STATUS: VERIFIED**
 
 #### Instruction 10: beq r0, r0, 15 
 
@@ -1108,6 +1136,7 @@ Value of general purpose registers before running the program
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
+**STATUS: VERIFIED**
 
 #### Instruction 11: add r14, r2, r2 
 
@@ -1134,6 +1163,7 @@ Value of general purpose registers before running the program
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
+**STATUS: VERIFIED**
 
 
 
