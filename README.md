@@ -919,6 +919,9 @@ Value of general purpose registers before running the program
 
 #### Instruction 1: add r6, r1, r2  
 
+![in1](https://github.com/user-attachments/assets/0362eedf-8249-4b89-b252-fa5d375548f7)
+
+
 ![image](https://github.com/user-attachments/assets/19dd958b-06d5-40ca-b07d-0e2c230988b2)
 
 
