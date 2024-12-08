@@ -878,7 +878,7 @@ $ iverilog -o iiitb_rv32i iiitb_rv32i.v iiitb_rv32i_tb.v
 $ ./iiitb_rv32i
 ```
 
-- To open the dumped waveform vcd file
+- To open the dumped vcd file
 ```
 $ gtkwave iiitb_rv32i.vcd
 ```
