@@ -917,11 +917,12 @@ Value of general purpose registers before running the program (As per the design
 | REG[5]       | 0x00000005       | 5                   |
 | REG[6]       | 0x00000006       | 6                   | 
 
-# Instruction 1: add r6, r1, r2  
+## Instruction 1: add r6, r1, r2  
 
 ![in1](https://github.com/user-attachments/assets/0362eedf-8249-4b89-b252-fa5d375548f7)
 
-
+- REG[6] = REG[1] + REG[2] = 1 + 2 = 3
+- 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
 | REG[0]       | 0x00000000       | 0                   |
@@ -932,17 +933,13 @@ Value of general purpose registers before running the program (As per the design
 | REG[5]       | 0x00000005       | 5                   |
 | REG[6]       | 0x00000003       | 3                   |
 
-```
-REG[6] = REG[1] + REG[2] = 1 + 2 = 3
-```
 
-**STATUS: VERIFIED**
-
-# Instruction 2: sub r7, r1, r2
+## Instruction 2: sub r7, r1, r2
 
 ![in2](https://github.com/user-attachments/assets/8cbfe1b1-4933-411c-948d-1f1b7e20c60e)
 
-
+- REG[7] = REG[1] - REG[2] = 1 - 2 = -1
+- 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
 | REG[0]       | 0x00000000       | 0                   |
@@ -954,16 +951,12 @@ REG[6] = REG[1] + REG[2] = 1 + 2 = 3
 | REG[6]       | 0x00000003       | 3                   |
 | REG[7]       | 0xFFFFFFFF       | -1                  |
 
-```
-REG[7] = REG[1] - REG[2] = 1 - 2 = -1
-```
 
-**STATUS: VERIFIED**
-
-#### Instruction 3: and r8, r1, r3
+## Instruction 3: and r8, r1, r3
 
 ![in3](https://github.com/user-attachments/assets/aa25ca12-7163-44de-ad97-6939daee59d3)
 
+- REG[8] = REG[1] AND REG[3] = 1 AND 3 = 01 AND 11 = 01 = 1 (decimal)  
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -977,17 +970,13 @@ REG[7] = REG[1] - REG[2] = 1 - 2 = -1
 | REG[7]       | 0xFFFFFFFF       | -1                  |
 | REG[8]       | 0x00000001       | 1                   |
 
-```
-REG[8] = REG[1] AND REG[3] = 1 AND 3 = 01 AND 11 = 01 = 1 (decimal) 
-```
 
-**STATUS: VERIFIED**
-
-#### Instruction 4: or r9, r2, r5
+## Instruction 4: or r9, r2, r5
 
 ![in4](https://github.com/user-attachments/assets/718af532-02c0-45b6-8d9e-a4901b59260d)
 
-
+- REG[9] = REG[2] OR REG[5] = 2 OR 5 = 010 OR 101 = 111 = 7 (decimal)
+  
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
 | REG[0]       | 0x00000000       | 0                   |
@@ -1001,16 +990,12 @@ REG[8] = REG[1] AND REG[3] = 1 AND 3 = 01 AND 11 = 01 = 1 (decimal)
 | REG[8]       | 0x00000001       | 1                   |
 | REG[9]       | 0x00000007       | 7                   |
 
-```
-REG[9] = REG[2] OR REG[5] = 2 OR 5 = 010 OR 101 = 111 = 7 (decimal) 
-```
 
-**STATUS: VERIFIED**
-
-#### Instruction 5: xor r10, r1, r4 
+## Instruction 5: xor r10, r1, r4 
 
 ![in5](https://github.com/user-attachments/assets/284d60d7-5552-4977-b6dc-551714604ad8)
 
+- REG[10] = REG[1] XOR REG[4] = 1 XOR 4 = 001 OR 100 = 101 = 5 (decimal) 
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -1026,21 +1011,14 @@ REG[9] = REG[2] OR REG[5] = 2 OR 5 = 010 OR 101 = 111 = 7 (decimal)
 | REG[9]       | 0x00000007       | 7                   |
 | REG[10]      | 0x00000005       | 5                   |
 
-```
-REG[10] = REG[1] XOR REG[4] = 1 XOR 4 = 001 OR 100 = 101 = 5 (decimal) 
-```
 
-**STATUS: VERIFIED**
-
-#### Instruction 6: slt r11, r2, r4  
+## Instruction 6: slt r11, r2, r4  
 
 ![in6](https://github.com/user-attachments/assets/604450bb-8b33-414b-a59a-611ca579c12c)
 
-```
-REG[2] = 2 (0x00000002)
-REG[4] = 4 (0x00000004)
-Since 2 < 4, the slt instruction will set REG[11] to 1
-```
+- REG[2] = 2 (0x00000002)
+- REG[4] = 4 (0x00000004)
+- Since 2 < 4, the slt instruction will set REG[11] to 1
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|----------------------|
@@ -1057,17 +1035,14 @@ Since 2 < 4, the slt instruction will set REG[11] to 1
 | REG[10]      | 0x00000005       | 5                   |
 | REG[11]      | 0x00000001       | 1                   |
 
-**STATUS: VERIFIED**
 
-#### Instruction 7: addi r12, r4, 5 
+## Instruction 7: addi r12, r4, 5 
 
 ![in7](https://github.com/user-attachments/assets/7e90ff88-e93d-4a0b-bf1c-50880de82dc1)
 
-```
-REG[4] = 4 (0x00000004)
-Immediate value = 5
-REG[12] = REG[4] + 5 = 4 + 5 = 9
-```
+- REG[4] = 4 (0x00000004)
+- Immediate value = 5
+- REG[12] = REG[4] + 5 = 4 + 5 = 9
 
 | **Register** | **Value (Hex)** | **Value (Decimal)** |
 |--------------|------------------|---------------------|
@@ -1085,9 +1060,7 @@ REG[12] = REG[4] + 5 = 4 + 5 = 9
 | REG[11]      | 0x00000001       | 1                   |
 | REG[12]      | 0x00000009       | 9                   |
 
-**STATUS: VERIFIED**
-
-#### Instruction 8: sw r3, 2(r1)
+## Instruction 8: sw r3, 2(r1)
 
 ![in8](https://github.com/user-attachments/assets/6b34f0ad-173f-4e8d-8fad-76a93a729531)
 
@@ -1117,9 +1090,8 @@ REG[12] = REG[4] + 5 = 4 + 5 = 9
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
-**STATUS: VERIFIED**
 
-#### Instruction 9: lw r13, 2(r1)
+## Instruction 9: lw r13, 2(r1)
 
 ![in9](https://github.com/user-attachments/assets/bbedf59d-02c6-44ef-b1da-5d34533c300a)
 
@@ -1150,9 +1122,8 @@ REG[12] = REG[4] + 5 = 4 + 5 = 9
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
-**STATUS: VERIFIED**
 
-#### Instruction 10: beq r0, r0, 15 
+## Instruction 10: beq r0, r0, 15 
 
 - REG[0] = 0 (0x00000000)
 - The beq instruction compares r0 with r0, and since both are equal (both are 0), the branch is taken.
@@ -1181,9 +1152,8 @@ REG[12] = REG[4] + 5 = 4 + 5 = 9
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
-**STATUS: VERIFIED**
 
-#### Instruction 11: add r14, r2, r2 
+## Instruction 11: add r14, r2, r2 
 
 ![in11](https://github.com/user-attachments/assets/5466a591-39ba-4513-8174-04bf51d8fc8e)
 
@@ -1216,7 +1186,9 @@ REG[12] = REG[4] + 5 = 4 + 5 = 9
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
-**STATUS: VERIFIED**
+**HENCE THE DESIGN CODE VERIFIED SUCCESSFULLY ✅**
+
+---
 
 
 
