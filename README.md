@@ -306,7 +306,7 @@ int main() {
 
 ---
 
-# Task2
+## Task3
 
 ## RISC-V ISA
 
@@ -865,8 +865,25 @@ For the instruction `sd a1, 8(a4)`:
 
 ---
 
+## Task 4
 
+## Functional simulation of the given design code of pipelined RISC V 32I Processor
 
+### Initial steps
+
+- Both design and testbench codes are saved in a separate folder
+- To simulate the verilog code
+```
+$ iverilog -o iiitb_rv32i iiitb_rv32i.v iiitb_rv32i_tb.v
+$ ./iiitb_rv32i
+```
+
+- To open the dumped waveform vcd file
+```
+$ gtkwave iiitb_rv32i.vcd
+```
+
+![task4pic1](https://github.com/user-attachments/assets/c1dba9ef-1fdd-4c76-8024-1f3dc78382f5)
 
 
 
