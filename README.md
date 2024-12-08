@@ -1125,6 +1125,9 @@ Value of general purpose registers before running the program (As per the design
 
 ## Instruction 10: beq r0, r0, 15 
 
+![new](https://github.com/user-attachments/assets/8711fe44-649b-4a13-a525-e4b72e78d57e)
+
+
 - REG[0] = 0 (0x00000000)
 - The beq instruction compares r0 with r0, and since both are equal (both are 0), the branch is taken.
 - The instruction specifies a branch offset of 15, so the program will jump to address 15 in the instruction memory.
