@@ -917,7 +917,7 @@ Value of general purpose registers before running the program (As per the design
 | REG[5]       | 0x00000005       | 5                   |
 | REG[6]       | 0x00000006       | 6                   | 
 
-#### Instruction 1: add r6, r1, r2  
+# Instruction 1: add r6, r1, r2  
 
 ![in1](https://github.com/user-attachments/assets/0362eedf-8249-4b89-b252-fa5d375548f7)
 
@@ -938,7 +938,7 @@ REG[6] = REG[1] + REG[2] = 1 + 2 = 3
 
 **STATUS: VERIFIED**
 
-#### Instruction 2: sub r7, r1, r2
+# Instruction 2: sub r7, r1, r2
 
 ![in2](https://github.com/user-attachments/assets/8cbfe1b1-4933-411c-948d-1f1b7e20c60e)
 
