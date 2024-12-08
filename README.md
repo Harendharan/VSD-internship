@@ -1186,7 +1186,7 @@ Value of general purpose registers before running the program (As per the design
 | MEM[2]       | 0x00000002       | 2                   |
 | MEM[3]       | 0x00000003       | 3                   |
 
-**HENCE THE DESIGN CODE VERIFIED SUCCESSFULLY ✅**
+**HENCE THE DESIGN CODE IS VERIFIED SUCCESSFULLY ✅**
 
 ---
 
