@@ -286,7 +286,7 @@ int main() {
   ```
   $ spike pk bpnn.o
   ```
-![task2pic6](https://github.com/user-attachments/assets/a3fdb3ac-4f99-4270-b537-e142749afac6)
+![task2pic6](https://github.com/user-attachments/assets/0786e303-e551-4deb-af24-81f7e83c8e4c)
 
 ---
 
