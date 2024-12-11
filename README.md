@@ -1194,7 +1194,7 @@ Value of general purpose registers before running the program (As per the design
 
 ## Task 5
 
-**Interfacing CH32V003X and Raspberry Pi Pico via UART, SPI, and I2C for Efficient Data Exchange**  
+**Interfacing CH32V003X and Raspberry Pi Pico via UART, SPI, and I2C for Efficient Data Transmission**  
 
 ---
 
