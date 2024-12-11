@@ -1266,7 +1266,7 @@ This project illustrates the versatility of CH32V003X and Raspberry Pi Pico in h
 
 ---
 
-## Future Scope  
+### Future Scope  
 1. Extending communication to additional protocols like CAN or USB.  
 2. Integrating sensors or peripherals to test real-world scenarios.  
 3. Optimizing power consumption for energy-efficient designs.  
