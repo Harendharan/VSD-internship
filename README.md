@@ -1246,7 +1246,7 @@ This project demonstrates controlling Raspberry Pi Pico with our VSDSqradron Min
 
 ---
 
-### Connection
+### Circuit Connection and Programming
 
 
 ---
