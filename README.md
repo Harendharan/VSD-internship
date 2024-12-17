@@ -1224,7 +1224,7 @@ This project demonstrates controlling Raspberry Pi Pico with our VSDSqradron Min
 
 ---
 
-### CH32V003F4U6 RISC-V SoC IO Bank Assignment for Communication Interfaces 
+### CH32V003F4U6 RISC-V SoC IO Bank Assignment for Communication Interfaces 
 
 ![image](https://github.com/user-attachments/assets/beeaf265-9806-405d-95bb-bf4f95c18ca5)
 
