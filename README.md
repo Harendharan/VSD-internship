@@ -1199,7 +1199,7 @@ Value of general purpose registers before running the program (As per the design
 ---
 
 ### Overview
-This project demonstrates controlling Raspberry Pi Pico with our VSDSqradron Mini using comunication protocol  (USART) at a common baud rate (e.g., 9600 bps). VSDSquadron Mini is powered by CH32V003F4U6 chip with 32-bit RISC-V core based on RV32EC instruction set and on the other hand, Raspberry Pi Pico is based on ARM Cortex-M0+ based microcontroller. In our project, We re controlling the ARM based Raspberry Pi Pico with our RISC V based VSDSqradron Mini board. It can also be done vice versa.  
+This project demonstrates controlling Raspberry Pi Pico with our VSDSqradron Mini using comunication protocol Universal Synchronous Asynchronous Receiver-Transmitter (USART) at a common baud rate (e.g., 9600 bps). VSDSquadron Mini is powered by CH32V003F4U6 chip with 32-bit RISC-V core based on RV32EC instruction set and on the other hand, Raspberry Pi Pico is based on ARM Cortex-M0+ based microcontroller. In our project, We are controlling the ARM based Raspberry Pi Pico with our RISC V based VSDSqradron Mini board. It can also be done vice versa.  
 
 ---
 
