@@ -1194,85 +1194,62 @@ Value of general purpose registers before running the program (As per the design
 
 ## Task 5
 
-**Interfacing CH32V003X and Raspberry Pi Pico via UART, SPI, and I2C for Efficient Data Transmission**  
+**Interfacing VSDSquadron Mini (CH32V003F4U6) and Raspberry Pi Pico via (RP2040)**  
 
 ---
 
 ### Overview
-This project demonstrates seamless communication between the CH32V003X microcontroller and the Raspberry Pi Pico using three widely used serial communication protocols: **UART**, **SPI**, and **I2C**. The integration enables efficient data exchange and highlights cross-platform compatibility between these two microcontroller platforms.
-
----
-
-### Objectives  
-1. To establish a robust communication link between CH32V003X and Raspberry Pi Pico using UART, SPI, and I2C.  
-2. To explore real-time data transfer scenarios, including command-response mechanisms and sensor data exchange.  
-3. To create reusable firmware for interfacing between RISC-V-based CH32V003X and the ARM Cortex-M0+ Raspberry Pi Pico.  
+This project demonstrates controlling Raspberry Pi Pico with our VSDSqradron Mini using comunication protocol  (USART) at a common baud rate (e.g., 9600 bps). VSDSquadron Mini is powered by CH32V003F4U6 chip with 32-bit RISC-V core based on RV32EC instruction set and on the other hand, Raspberry Pi Pico is based on ARM Cortex-M0+ based microcontroller. In our project, We re controlling the ARM based Raspberry Pi Pico with our RISC V based VSDSqradron Mini board. It can also be done vice versa.  
 
 ---
 
 ### Components Required 
-1. **CH32V003X Microcontroller**  
-   - RISC-V based low-power MCU.  
-   - Integrated UART, SPI, and I2C peripherals.  
-2. **Raspberry Pi Pico**  
-   - ARM Cortex-M0+ based microcontroller.  
-   - Dual-core processing and support for UART, SPI, and I2C.  
-3. **Common Peripherals**  
-   - UART communication lines: TX and RX.  
-   - SPI signals: MOSI, MISO, SCLK, and CS.  
-   - I2C lines: SDA and SCL with pull-up resistors.  
-4. **Power Source**  
-   - 3.3V power supply for both microcontrollers.  
+1. VSDSquadron Mini (CH32V003F4U6)    
+2. Raspberry Pi Pico (RP2040)  
+3. Connecting Wires
+4. Bread Board
+5. Power Supply   
 
 ---
 
-### Methodology  
-1. **UART Communication**  
-   - Configure CH32V003X and Raspberry Pi Pico UART peripherals at a common baud rate (e.g., 9600 bps).  
-   - Exchange predefined data packets between the two devices.  
-   - Validate data integrity using checksum mechanisms.  
+### Software Required  
+1. Arduino IDE
+2. Thonny
+   
+---
 
-2. **SPI Communication**  
-   - Set CH32V003X as the SPI **Master** and Raspberry Pi Pico as the **Slave**.  
-   - Transmit and receive data buffers to simulate sensor data processing.  
+### Raspberry Pi Pico Pin diagram
 
-3. **I2C Communication**  
-   - Configure CH32V003X as the **Master** and Raspberry Pi Pico as the **Slave**.  
-   - Read and write registers on the Raspberry Pi Pico to mimic real-world I2C-based device interaction.  
+![image](https://github.com/user-attachments/assets/c1be58d4-2512-489e-8f2a-b35ba4e41d51)
 
 ---
 
-### Firmware Development  
-1. **CH32V003X Code**  
-   - Written in **C** using the official WCH library for CH32.  
-   - Separate routines for UART, SPI, and I2C initialization and communication.  
+### CH32V003F4U6 RISC-V SoC IO Bank Assignment for Communication Interfaces 
 
-2. **Raspberry Pi Pico Code**  
-   - Written in **C** using the official Raspberry Pi Pico SDK.  
-   - Implementation of interrupt-driven UART, SPI, and I2C handlers.  
+![image](https://github.com/user-attachments/assets/beeaf265-9806-405d-95bb-bf4f95c18ca5)
 
 ---
 
-### Results  
-1. Successfully established real-time communication between CH32V003X and Raspberry Pi Pico.  
-2. **UART**: Exchanged text strings and verified data accuracy using a checksum.  
-3. **SPI**: Simulated sensor data read/write with latency measured at less than 5 µs.  
-4. **I2C**: Performed successful register-based communication with minimal delay.  
+### Pin Connections
+
+| **VSDSquadron Mini** | **Raspberry Pi Pico** |
+|-----------------------------|-----------------------------|
+|          PD6 (RX)           |           GP4 (TX)          |
+|          PD5 (TX)           |           GP5 (RX)          |
+|          GND                |           GND               |
 
 ---
 
-### Conclusion  
-This project illustrates the versatility of CH32V003X and Raspberry Pi Pico in handling different serial communication protocols. It provides a foundation for advanced IoT applications requiring efficient data exchange between microcontrollers.  
+### Circuit diagram
+
+![image](https://github.com/user-attachments/assets/42a39651-b385-4c73-aa5d-02b249423733)
 
 ---
 
-### Future Scope  
-1. Extending communication to additional protocols like CAN or USB.  
-2. Integrating sensors or peripherals to test real-world scenarios.  
-3. Optimizing power consumption for energy-efficient designs.  
+### Connection
+
 
 ---
-
 
 
 
