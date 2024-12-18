@@ -1261,14 +1261,18 @@ void setup() {
   // Configure PD5 (Digital Pin 5) as an output pin
   pinMode(TX, OUTPUT);
 
-  // Set PD5 to HIGH
+  pinMode(RX INPUT);
+
+  Serial.begin(9600);
+
+ // Set PD5 to HIGH
   digitalWrite(TX, HIGH);
 }
 
 void loop() {
-  // Do nothing forever to keep PD5 HIGH
+  // To keep PD5 HIGH forever
   while (1) {
-    // Infinite loop ensures no other operation runs
+    // Infinite loop 
   }
 }
 ```
@@ -1281,18 +1285,16 @@ void loop() {
 from machine import Pin, UART
 import time
 
-# Initialize the UART interface (UART1 with baudrate 115200)
-uart = UART(1, baudrate=115200, tx=Pin(4), rx=Pin(5))
+# Initialize the UART interface 
+uart = UART(1, baudrate=9600, tx=Pin(4), rx=Pin(5))
 
-# Initialize the LED on GPIO 15 (adjust pin number based on your hardware)
+# Initialize the LED on GPIO 25 
 led = Pin(25, Pin.OUT)
 
-# Set up the TX pin (Pin 4) as input to monitor its state
+
 tx_pin = Pin(4, Pin.IN)
 rx_pin = Pin(5, Pin.IN)
 
-
-# Main loop to monitor TX pin and turn on LED when high
 
 while True:
     if rx_pin.value() == 1:  # Check if TX pin is high
@@ -1301,8 +1303,8 @@ while True:
     else:
         #print("rx_pin.value")
         led.value(0)  # Turn off LED
-        #time.sleep(0.1)
-    time.sleep(0.1)  # Small delay to prevent overwhelming the CPU
+       
+    time.sleep(0.1)  
 ```
 
 ---
