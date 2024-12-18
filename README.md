@@ -1246,13 +1246,66 @@ This project demonstrates controlling Raspberry Pi Pico with our VSDSqradron Min
 
 ---
 
-### Circuit Connection and Programming
+### Circuit Connection 
 
+The transmitter is the VSDSquadron Mini development board featuring the CH32V003F4U6 RISC-V microcontroller, while the receiver is a Raspberry Pi Pico based on the ARM Cortex-M0+ based microcontroller. The VSDSquadron Mini’s TX pin (PD5) is connected to the RP2040’s RX pin (GPIO 5), with a common ground connection between both boards. The VSDSquadron Mini is programmed using the onboard single-wire programmer via USB-C, with development done in C using an Arduino IDE. The Raspberry Pi Pico is programmed in MicroPython using the Thonny IDE, leveraging the machine library for UART communication and GPIO control. The VSDSquadron Mini transmits a constant HIGH signal on its TX pin, and the Raspberry Pi Pico monitors the RX pin, toggling an LED on GPIO 25 ON or OFF based on the signal state. 
 
 ---
 
+### TRANSMITTER CODE - VSDSquadron Mini (Arduino IDE)
+
+```c
+#define TX PD5
+#define TX PD6
+void setup() {
+  // Configure PD5 (Digital Pin 5) as an output pin
+  pinMode(TX, OUTPUT);
+
+  // Set PD5 to HIGH
+  digitalWrite(TX, HIGH);
+}
+
+void loop() {
+  // Do nothing forever to keep PD5 HIGH
+  while (1) {
+    // Infinite loop ensures no other operation runs
+  }
+}
+```
+
+---
+
+### RECEIVER CODE - Raspberry Pi Pico (Thonny)
+
+```python
+from machine import Pin, UART
+import time
+
+# Initialize the UART interface (UART1 with baudrate 115200)
+uart = UART(1, baudrate=115200, tx=Pin(4), rx=Pin(5))
+
+# Initialize the LED on GPIO 15 (adjust pin number based on your hardware)
+led = Pin(25, Pin.OUT)
+
+# Set up the TX pin (Pin 4) as input to monitor its state
+tx_pin = Pin(4, Pin.IN)
+rx_pin = Pin(5, Pin.IN)
 
 
+# Main loop to monitor TX pin and turn on LED when high
+
+while True:
+    if rx_pin.value() == 1:  # Check if TX pin is high
+       #print("tx_pin.value")
+       led.value(1)  # Turn on LED
+    else:
+        #print("rx_pin.value")
+        led.value(0)  # Turn off LED
+        #time.sleep(0.1)
+    time.sleep(0.1)  # Small delay to prevent overwhelming the CPU
+```
+
+---
 
 
 
