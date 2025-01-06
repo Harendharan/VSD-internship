@@ -1194,7 +1194,7 @@ Value of general purpose registers before running the program (As per the design
 
 ## Task 5
 
-**Interfacing VSDSquadron Mini (CH32V003F4U6) and Raspberry Pi Pico via (RP2040)**  
+**Interfacing VSDSquadron Mini (CH32V003F4U6) and Raspberry Pi Pico (RP2040)**  
 
 ---
 
